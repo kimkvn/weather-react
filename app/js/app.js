@@ -3,8 +3,10 @@ var App = React.createClass({
   getInitialState: function(){
     return({
       tempKel: '',
-      tempF: '',
-      tempC: '',
+      tempF: '' + ' &#176 F',
+      tempC: '' + ' &#176 C',
+      displayTemp: '',
+      iconCode: '',
     });
   },
 
@@ -14,8 +16,7 @@ var App = React.createClass({
     var longitude = -84.387982;
     var weatherURL = '//api.openweathermap.org/data/2.5/weather?q=Atlanta&APPID='+weatherKey;
 
-    // https://api.darksky.net/forecast/9015e70a6b3a67646b7b52980ff99846/33.748995,-84.387982
-
+    //aliasing 'this' for the fetch request
     var component = this;
 
     fetch(weatherURL)
@@ -28,41 +29,46 @@ var App = React.createClass({
           //Examine the text in the response;
           response.json().then(function(data){
             console.log(data);
-            console.log(data.main.temp);
+
+            var kelvin = data.main.temp;
+            var fahrenheit = Math.floor(kelvin * (9/5) - 459.67);
+            var celsius = Math.floor(kelvin - 273.15);
+
             component.setState({
-              tempKel: data.main.temp
+              tempKel: data.main.temp,
+              tempF: fahrenheit,
+              tempC: celsius,
+              displayTemp: fahrenheit,
+              iconCode: 'https://openweathermap.org/img/w/'+data.weather[0].icon+'.png'
             });
-            component.tempConvert();
           });
         }
       )
       .catch(function(err){
         console.log('Fetch Error', err);
       });
-
-      // IMPORTANT!!!!
-      //    the default unit returned for temperature is in Kelvin.
-
   },
 
-  tempConvert: function(){
-    var kelvin = this.state.tempKel;
-    var fahrenheit = Math.floor(kelvin * (9/5) - 459.67);
-    var celsius = Math.floor(kelvin - 273.15);
+  getTempF: function(){
     this.setState({
-      tempF: fahrenheit,
-      tempC: celsius,
-    });
+      displayTemp: this.state.tempF
+    })
+  },
+
+  getTempC: function(){
+    this.setState({
+      displayTemp: this.state.tempC
+    })
   },
 
   render: function(){
     return(
       <div>
-        <h1>hello world</h1>
         <div>
           The current temperature is:
-          <h3>{this.state.tempF} F</h3>
-          <h3>{this.state.tempC} C</h3>
+          <h1>{this.state.displayTemp}</h1>
+          <img src={this.state.iconCode} />
+          <a onClick={this.getTempF}> &#176;F</a> | <a onClick={this.getTempC}> &#176;C</a>
         </div>
       </div>
   )}
