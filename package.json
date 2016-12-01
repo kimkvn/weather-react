@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/kimkvn/weather-react/issues"
   },
-  "homepage": "https://github.com/kimkvn/weather-react#readme"
+  "homepage": "https://github.com/kimkvn/weather-react#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.2",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2"
+  }
 }
