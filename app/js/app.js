@@ -14,41 +14,6 @@ var App = React.createClass({
   componentDidMount: function(){
     this.getCurrentWeather();
 
-    var weatherKey = '8ef93b3325212e85f516fd49083dd5f0';
-    var latitude = 33.748995;
-    var longitude = -84.387982;
-    var weatherURL = '//api.openweathermap.org/data/2.5/forecast?q=Atlanta&APPID='+weatherKey;
-
-    fetch(weatherURL)
-      .then(
-        function(response){
-          if(response.status !== 200){
-            console.log('Whoops, encountered issue. Status COde:' + response.status);
-            return;
-          }
-          //examine the test in the response;
-          response.json().then(function(data){
-            console.log(data);
-            console.log(data.list[0], data.list[1], data.list[2]);
-            var days = [
-              "Sun",
-              "Mon",
-              "Tue",
-              "Wed",
-              "Thu",
-              "Fri",
-              "Sat"
-            ];
-
-
-
-
-          });
-      })
-      .catch(function(err){
-        console.log('Fetch Error', err);
-      })
-
   },
 
   getCurrentWeather: function(){
