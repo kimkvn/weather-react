@@ -1,7 +1,26 @@
+.current-temp-wrap {
+  text-align: center; }
+  .current-temp-wrap .temp-block {
+    position: relative;
+    margin: 0 auto;
+    max-width: 20em; }
+    .current-temp-wrap .temp-block .unit-toggle {
+      position: absolute;
+      top: 0;
+      right: 5em; }
+  .current-temp-wrap .description-wrap img {
+    width: 50%; }
+
 .forecast-wrap {
   border: 1px solid purple; }
   .forecast-wrap .day-block {
     border: 1px solid black; }
+    .forecast-wrap .day-block .day-name {
+      padding: 2ex; }
+    .forecast-wrap .day-block .img-wrap {
+      padding: 2.5ex; }
+      .forecast-wrap .day-block .img-wrap img {
+        width: 70%; }
     .forecast-wrap .day-block .high-low {
       display: block;
       padding: 2.5ex;

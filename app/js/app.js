@@ -8,6 +8,7 @@ var App = React.createClass({
       displayTemp: '',
       iconCode: '',
       description: '',
+      welcomeText: '',
     });
   },
 
@@ -68,16 +69,30 @@ var App = React.createClass({
     })
   },
 
+  // setWelcomeText: function(){
+  //
+  // },
+
   render: function(){
     return(
-      <div>
-        <div>
+      <div className="current-temp-wrap">
+
+        <div className="welcome-message">
           The current temperature is:
+        </div>
+        <div className="temp-block">
           <h1>{this.state.displayTemp}</h1>
+          <div className="unit-toggle">
+            <a onClick={this.getTempF}> &#176;F</a>
+            <span> | </span> 
+            <a onClick={this.getTempC}> &#176;C</a>
+          </div>
+        </div>
+        <div className="description-wrap">
           <p>{this.state.description}</p>
           <img src={this.state.iconCode} />
-          <a onClick={this.getTempF}> &#176;F</a> | <a onClick={this.getTempC}> &#176;C</a>
         </div>
+
       </div>
   )}
 });

@@ -1,3 +1,35 @@
+
+.current-temp-wrap{
+  text-align: center;
+
+  .welcome-message{
+
+  }
+
+  .temp-block{
+    position: relative;
+    margin: 0 auto;
+    max-width: 20em;
+
+    h1{
+
+    }
+
+    .unit-toggle{
+      position: absolute;
+      top: 0;
+      right: 5em;
+    }
+  }
+
+  .description-wrap{
+    img{
+      width: 50%;
+    }
+  }
+}
+
+
 .forecast-wrap{
   border: 1px solid purple;
 
@@ -5,12 +37,13 @@
     border: 1px solid black;
 
     .day-name{
-
+      padding: 2ex;
     }
 
     .img-wrap{
+      padding: 2.5ex;
       img{
-
+        width: 70%;
       }
     }
 
