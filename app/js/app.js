@@ -34,7 +34,7 @@ var App = React.createClass({
           }
           //Examine the text in the response;
           response.json().then(function(data){
-            console.log(data);
+            // console.log(data);
 
             var kelvin = data.main.temp;
             var fahrenheit = Math.floor(kelvin * (9/5) - 459.67);

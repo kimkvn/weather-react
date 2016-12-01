@@ -34,8 +34,8 @@ var Forecast = React.createClass({
           }
           //examine the test in the response;
           response.json().then(function(data){
-            console.log(data);
-            console.log(data.list[0], data.list[1], data.list[2]);
+            // console.log(data);
+            // console.log(data.list[0], data.list[1], data.list[2]);
             var day0 = data.list[0],
                 day1 = data.list[1],
                 day2 = data.list[2],
@@ -56,6 +56,8 @@ var Forecast = React.createClass({
                 low1 = Math.floor(day1.main.temp_min * (9/5) - 459.67),
                 low2 = Math.floor(day2.main.temp_min * (9/5) - 459.67);
 
+                // iconCode: 'https://openweathermap.org/img/w/'+data.weather[0].icon+'.png',
+
             component.setState({
               day0 : days[index0],
               day1: days[index1],
@@ -65,7 +67,10 @@ var Forecast = React.createClass({
               day2High: high2,
               day0Low: low0,
               day1Low: low1,
-              day2Low: low2
+              day2Low: low2,
+              day0Icon: 'https://openweathermap.org/img/w/'+day0.weather[0].icon+'.png',
+              day1Icon: 'https://openweathermap.org/img/w/'+day1.weather[0].icon+'.png',
+              day2Icon: 'https://openweathermap.org/img/w/'+day2.weather[0].icon+'.png',
             });
 
           });
@@ -83,7 +88,7 @@ var Forecast = React.createClass({
             <h3>{this.state.day0}</h3>
           </div>
           <div className="img-wrap">
-            <img src="" />
+            <img src={this.state.day0Icon} />
           </div>
           <div className="high-low">
             <h5 className="high">{this.state.day0High}</h5>
@@ -95,7 +100,7 @@ var Forecast = React.createClass({
             <h3>{this.state.day1}</h3>
           </div>
           <div className="img-wrap">
-            <img src="" />
+            <img src={this.state.day1Icon} />
           </div>
           <div className="high-low">
             <h5 className="high">{this.state.day1High}</h5>
@@ -107,7 +112,7 @@ var Forecast = React.createClass({
             <h3>{this.state.day2}</h3>
           </div>
           <div className="img-wrap">
-            <img src="" />
+            <img src={this.state.day2Icon} />
           </div>
           <div className="high-low">
             <h5 className="high">{this.state.day2High}</h5>
