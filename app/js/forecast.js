@@ -5,12 +5,12 @@ var Forecast = React.createClass({
       day0: '',
       day1: '',
       day2: '',
-      day0High: '56',
-      day1High: '58',
-      day2High: '58',
-      day0Low: '36',
-      day1Low: '39',
-      day2Low: '44',
+      day0High: '',
+      day1High: '',
+      day2High: '',
+      day0Low: '',
+      day1Low: '',
+      day2Low: '',
       day0Icon: '',
       day1Icon: '',
       day2Icon: '',
@@ -39,25 +39,33 @@ var Forecast = React.createClass({
             var day0 = data.list[0],
                 day1 = data.list[1],
                 day2 = data.list[2],
-                days = [
-              "Sun",
-              "Mon",
-              "Tue",
-              "Wed",
-              "Thu",
-              "Fri",
-              "Sat"
-            ];
+                days = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
             var index0 = (new Date(day0.dt_txt)).getUTCDay()-1,
                 index1 = (new Date(day1.dt_txt)).getUTCDay(),
-                index2 = (new Date(day2.dt_txt)).getUTCDay()+1
+                index2 = (new Date(day2.dt_txt)).getUTCDay()+1;
 
+            // var fahrenheit = Math.floor(kelvin * (9/5) - 459.67);
+            // var celsius = Math.floor(kelvin - 273.15);
+
+            var high0 = Math.floor(day0.main.temp_max * (9/5) - 459.67),
+                high1 = Math.floor(day1.main.temp_max * (9/5) - 459.67),
+                high2 = Math.floor(day2.main.temp_max * (9/5) - 459.67);
+
+            var low0 = Math.floor(day0.main.temp_min * (9/5) - 459.67),
+                low1 = Math.floor(day1.main.temp_min * (9/5) - 459.67),
+                low2 = Math.floor(day2.main.temp_min * (9/5) - 459.67);
 
             component.setState({
               day0 : days[index0],
               day1: days[index1],
-              day2: days[index2]
+              day2: days[index2],
+              day0High: high0,
+              day1High: high1,
+              day2High: high2,
+              day0Low: low0,
+              day1Low: low1,
+              day2Low: low2
             });
 
           });
