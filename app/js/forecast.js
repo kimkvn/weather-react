@@ -2,9 +2,9 @@ var Forecast = React.createClass({
 
   getInitialState: function(){
     return({
-      day0: 'Thu',
-      day1: 'Fri',
-      day2: 'Sat',
+      day0: '',
+      day1: '',
+      day2: '',
       day0High: '56',
       day1High: '58',
       day2High: '58',
@@ -29,14 +29,17 @@ var Forecast = React.createClass({
       .then(
         function(response){
           if(response.status !== 200){
-            console.log('Whoops, encountered issue. Status COde:' + response.status);
+            console.log('Whoops, encountered issue. Status Code:' + response.status);
             return;
           }
           //examine the test in the response;
           response.json().then(function(data){
             console.log(data);
             console.log(data.list[0], data.list[1], data.list[2]);
-            var days = [
+            var day0 = data.list[0],
+                day1 = data.list[1],
+                day2 = data.list[2],
+                days = [
               "Sun",
               "Mon",
               "Tue",
@@ -45,6 +48,18 @@ var Forecast = React.createClass({
               "Fri",
               "Sat"
             ];
+
+            var index0 = (new Date(day0.dt_txt)).getUTCDay()-1,
+                index1 = (new Date(day1.dt_txt)).getUTCDay(),
+                index2 = (new Date(day2.dt_txt)).getUTCDay()+1
+
+
+            component.setState({
+              day0 : days[index0],
+              day1: days[index1],
+              day2: days[index2]
+            });
+
           });
       })
       .catch(function(err){
