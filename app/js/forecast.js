@@ -91,8 +91,8 @@ var Forecast = React.createClass({
             <img src={this.state.day0Icon} />
           </div>
           <div className="high-low col-xs-4">
-            <h5 className="high">{this.state.day0High}</h5>
-            <h5 className="low">{this.state.day0Low}</h5>
+            <h5 className="high">{this.state.day0High}&#176;</h5>
+            <h5 className="low">{this.state.day0Low}&#176;</h5>
           </div>
         </div>
         <div className="day-1 day-block col-xs-12 col-sm-4">
@@ -103,8 +103,8 @@ var Forecast = React.createClass({
             <img src={this.state.day1Icon} />
           </div>
           <div className="high-low col-xs-4">
-            <h5 className="high">{this.state.day1High}</h5>
-            <h5 className="low">{this.state.day1Low}</h5>
+            <h5 className="high">{this.state.day1High}&#176;</h5>
+            <h5 className="low">{this.state.day1Low}&#176;</h5>
           </div>
         </div>
         <div className="day-2 day-block col-xs-12 col-sm-4">
@@ -115,8 +115,8 @@ var Forecast = React.createClass({
             <img src={this.state.day2Icon} />
           </div>
           <div className="high-low col-xs-4">
-            <h5 className="high">{this.state.day2High}</h5>
-            <h5 className="low">{this.state.day2Low}</h5>
+            <h5 className="high">{this.state.day2High}&#176;</h5>
+            <h5 className="low">{this.state.day2Low}&#176;</h5>
           </div>
         </div>
       </div>
