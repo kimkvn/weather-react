@@ -7,10 +7,51 @@ var App = React.createClass({
       tempC: '' + ' &#176 C',
       displayTemp: '',
       iconCode: '',
+      description: '',
     });
   },
 
   componentDidMount: function(){
+    this.getCurrentWeather();
+
+    var weatherKey = '8ef93b3325212e85f516fd49083dd5f0';
+    var latitude = 33.748995;
+    var longitude = -84.387982;
+    var weatherURL = '//api.openweathermap.org/data/2.5/forecast?q=Atlanta&APPID='+weatherKey;
+
+    fetch(weatherURL)
+      .then(
+        function(response){
+          if(response.status !== 200){
+            console.log('Whoops, encountered issue. Status COde:' + response.status);
+            return;
+          }
+          //examine the test in the response;
+          response.json().then(function(data){
+            console.log(data);
+            console.log(data.list[0], data.list[1], data.list[2]);
+            var days = [
+              "Sun",
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat"
+            ];
+
+
+
+
+          });
+      })
+      .catch(function(err){
+        console.log('Fetch Error', err);
+      })
+
+  },
+
+  getCurrentWeather: function(){
     var weatherKey = '8ef93b3325212e85f516fd49083dd5f0';
     var latitude = 33.748995;
     var longitude = -84.387982;
@@ -39,7 +80,8 @@ var App = React.createClass({
               tempF: fahrenheit,
               tempC: celsius,
               displayTemp: fahrenheit,
-              iconCode: 'https://openweathermap.org/img/w/'+data.weather[0].icon+'.png'
+              iconCode: 'https://openweathermap.org/img/w/'+data.weather[0].icon+'.png',
+              description: data.weather[0].description
             });
           });
         }
@@ -67,6 +109,7 @@ var App = React.createClass({
         <div>
           The current temperature is:
           <h1>{this.state.displayTemp}</h1>
+          <p>{this.state.description}</p>
           <img src={this.state.iconCode} />
           <a onClick={this.getTempF}> &#176;F</a> | <a onClick={this.getTempC}> &#176;C</a>
         </div>
