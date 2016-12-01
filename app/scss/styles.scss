@@ -1,1 +1,31 @@
+.forecast-wrap{
+  border: 1px solid purple;
 
+  .day-block{
+    border: 1px solid black;
+
+    .day-name{
+
+    }
+
+    .img-wrap{
+      img{
+
+      }
+    }
+
+    .high-low{
+      display: block;
+      padding: 2.5ex;
+      position: relative;
+
+      h5{
+        display: inline-block;
+        font-size: 1.5em;
+        margin-right: 1ex;
+      }
+    }
+
+
+  }
+}

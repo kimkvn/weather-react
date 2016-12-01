@@ -1,0 +1,12 @@
+.forecast-wrap {
+  border: 1px solid purple; }
+  .forecast-wrap .day-block {
+    border: 1px solid black; }
+    .forecast-wrap .day-block .high-low {
+      display: block;
+      padding: 2.5ex;
+      position: relative; }
+      .forecast-wrap .day-block .high-low h5 {
+        display: inline-block;
+        font-size: 1.5em;
+        margin-right: 1ex; }
