@@ -8,6 +8,8 @@ var App = React.createClass({
       displayTemp: '',
       iconCode: '',
       description: '',
+      humidity: '',
+      wind: '',
       welcomeText: '',
     });
   },
@@ -47,7 +49,9 @@ var App = React.createClass({
               tempC: celsius,
               displayTemp: fahrenheit,
               iconCode: 'https://openweathermap.org/img/w/'+data.weather[0].icon+'.png',
-              description: data.weather[0].description
+              description: data.weather[0].description,
+              humidity: data.main.humidity + "%",
+              wind: data.wind.speed + " mph",
             });
           });
         }
@@ -105,8 +109,10 @@ var App = React.createClass({
           </div>
         </div>
         <div className="description-wrap">
-          <p>{this.state.description}</p>
           <img src={this.state.iconCode} />
+          <p>{this.state.description}</p>
+          <p>Humidity : {this.state.humidity}</p>
+          <p>Wind: {this.state.wind}</p>
         </div>
 
       </div>
