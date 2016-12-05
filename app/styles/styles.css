@@ -1,3 +1,8 @@
+body {
+  background: #393E41;
+  border: 1px solid blue;
+  color: white; }
+
 .current-temp-wrap {
   text-align: center; }
   .current-temp-wrap .temp-block {
@@ -9,23 +14,29 @@
       top: 0;
       right: 5em; }
   .current-temp-wrap .description-wrap img {
-    width: 50%; }
+    width: 10em; }
 
 .forecast-wrap {
-  border: 1px solid purple; }
+  border: 1px solid purple;
+  margin: 0; }
+  .forecast-wrap .day-block-wrap {
+    border: 1px solid white;
+    margin: 1ex; }
   .forecast-wrap .day-block {
-    border: 1px solid black; }
+    border: 1px solid black;
+    text-align: center; }
+    .forecast-wrap .day-block div {
+      float: none; }
     .forecast-wrap .day-block .day-name {
-      padding: 2ex; }
+      display: inline-block; }
     .forecast-wrap .day-block .img-wrap {
-      padding: 2.5ex; }
-      .forecast-wrap .day-block .img-wrap img {
-        width: 70%; }
+      display: inline-block; }
     .forecast-wrap .day-block .high-low {
-      display: block;
-      padding: 2.5ex;
+      display: inline-block;
       position: relative; }
       .forecast-wrap .day-block .high-low h5 {
         display: inline-block;
         font-size: 1.5em;
-        margin-right: 1ex; }
+        margin-right: 0.5ex; }
+      .forecast-wrap .day-block .high-low .low {
+        color: gray; }

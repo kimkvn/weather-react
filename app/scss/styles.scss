@@ -1,3 +1,8 @@
+body{
+  background: #393E41;
+  border: 1px solid blue;
+  color: white;
+}
 
 .current-temp-wrap{
   text-align: center;
@@ -24,7 +29,7 @@
 
   .description-wrap{
     img{
-      width: 50%;
+      width: 10em;
     }
   }
 }
@@ -32,33 +37,43 @@
 
 .forecast-wrap{
   border: 1px solid purple;
-
+  margin: 0;
+  .day-block-wrap{
+    border: 1px solid white;
+    margin: 1ex;
+  }
   .day-block{
     border: 1px solid black;
-
+    text-align: center;
+    div{
+      float: none;
+    }
     .day-name{
-      padding: 2ex;
+      // padding: 2ex;
+      display: inline-block;
     }
 
     .img-wrap{
-      padding: 2.5ex;
+      // padding: 2.5ex;
+      display: inline-block;
       img{
-        width: 70%;
+        // width: 8em;
       }
     }
 
     .high-low{
-      display: block;
-      padding: 2.5ex;
+      display: inline-block;
+      // padding: 2.5ex;
       position: relative;
 
       h5{
         display: inline-block;
         font-size: 1.5em;
-        margin-right: 1ex;
+        margin-right: 0.5ex;
+      }
+      .low{
+        color: gray;
       }
     }
-
-
   }
 }
