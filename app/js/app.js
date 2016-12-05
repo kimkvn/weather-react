@@ -14,7 +14,7 @@ var App = React.createClass({
 
   componentDidMount: function(){
     this.getCurrentWeather();
-
+    this.setWelcomeText();
   },
 
   getCurrentWeather: function(){
@@ -69,15 +69,31 @@ var App = React.createClass({
     })
   },
 
-  // setWelcomeText: function(){
-  //
-  // },
+  setWelcomeText: function(){
+    var time = (new Date()).getHours();
+    if( time < 5 && time >= 18 ){
+      this.setState({
+        welcomeText: 'Good Evening!',
+      })
+    }
+    else if( time >= 5 && time < 12 ){
+      this.setState({
+        welcomeText: 'Good Morning!',
+      })
+    }
+    else if( time >= 12 && time < 18 ){
+      this.setState({
+        welcomeText: 'Good Afternoon!',
+      })
+    }
+  },
 
   render: function(){
     return(
       <div className="current-temp-wrap">
 
         <div className="welcome-message">
+          <h4>{this.state.welcomeText}</h4>
           The current temperature is:
         </div>
         <div className="temp-block">
