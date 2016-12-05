@@ -36,14 +36,14 @@ body{
 
 
 .forecast-wrap{
-  border: 1px solid purple;
+  // border: 1px solid purple;
   margin: 0;
   .day-block-wrap{
     border: 1px solid white;
     margin: 1ex;
   }
   .day-block{
-    border: 1px solid black;
+    // border: 1px solid black;
     text-align: center;
     div{
       float: none;
@@ -70,10 +70,20 @@ body{
         display: inline-block;
         font-size: 1.5em;
         margin-right: 0.5ex;
+        // padding-left: 1ex;
+
       }
       .low{
         color: gray;
       }
+    }
+  }
+}
+
+@media(min-width: 768px){
+  .high-low{
+    h5{
+      padding-left: 1ex;
     }
   }
 }

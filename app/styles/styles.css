@@ -17,13 +17,11 @@ body {
     width: 10em; }
 
 .forecast-wrap {
-  border: 1px solid purple;
   margin: 0; }
   .forecast-wrap .day-block-wrap {
     border: 1px solid white;
     margin: 1ex; }
   .forecast-wrap .day-block {
-    border: 1px solid black;
     text-align: center; }
     .forecast-wrap .day-block div {
       float: none; }
@@ -40,3 +38,7 @@ body {
         margin-right: 0.5ex; }
       .forecast-wrap .day-block .high-low .low {
         color: gray; }
+
+@media (min-width: 768px) {
+  .high-low h5 {
+    padding-left: 1ex; } }
