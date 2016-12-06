@@ -40,19 +40,20 @@ var App = React.createClass({
             console.log(data);
 
             var kelvin = data.main.temp;
-            var fahrenheit = Math.floor(kelvin * (9/5) - 459.67);
-            var celsius = Math.floor(kelvin - 273.15);
+            // var fahrenheit = Math.floor(kelvin * (9/5) - 459.67);
+            // var celsius = Math.floor(kelvin - 273.15);
 
             component.setState({
               tempKel: data.main.temp,
-              tempF: fahrenheit,
-              tempC: celsius,
-              displayTemp: fahrenheit,
+              // tempF: fahrenheit,
+              // tempC: celsius,
+              // displayTemp: fahrenheit,
               iconCode: 'https://openweathermap.org/img/w/'+data.weather[0].icon+'.png',
               description: data.weather[0].description,
               humidity: data.main.humidity + "%",
               wind: data.wind.speed + " mph",
             });
+            component.getTempF();
           });
         }
       )
@@ -63,13 +64,15 @@ var App = React.createClass({
 
   getTempF: function(){
     this.setState({
-      displayTemp: this.state.tempF
+      // displayTemp: this.state.tempF
+      displayTemp: Math.floor(this.state.tempKel * (9/5) - 459.67),
     })
   },
 
   getTempC: function(){
     this.setState({
-      displayTemp: this.state.tempC
+      // displayTemp: this.state.tempC
+      displayTemp: Math.floor(this.state.tempKel - 273.15),
     })
   },
 
