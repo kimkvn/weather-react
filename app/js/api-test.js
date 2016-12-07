@@ -9,33 +9,15 @@ var ApiTest = React.createClass({
     fetchJsonp(weatherURL, {
       timeout: 3000
     })
-      .then(
-        function(response){
-          // if(response.status !== 200){
-          //   console.log('Whoops! Encountered issue. Status Code:'+response.status);
-          //   return;
-          // }
-          response.json().then(function(data){
-            console.log(data)
-          })
-        })
+      .then(function(response){
+        return response.json()
+      })
+      .then(function(data){
+        console.log(data)
+      })
       .catch(function(err){
         console.log('Fetch Error:', err);
       })
-
-  //   var result = fetchJsonp(weatherURL, {
-  //     // jsonpCallback: 'jsoncallback',
-  //     timeout: 3000
-  //   })
-  //   result.then(function(response) {
-  //     return response.json()
-  //   }).then(function(data) {
-  //     // document.body.innerHTML = JSON.stringify(json);
-  //     console.log(data)
-  //   }).catch(
-  //     function(err) {
-  //       console.log('Fetch error:' + err);
-  //     });
 
   },
 
