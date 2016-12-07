@@ -3,13 +3,18 @@ var App = React.createClass({
   getInitialState: function(){
     return({
       tempKel: '',
-      tempF: '' + ' &#176 F',
-      tempC: '' + ' &#176 C',
+      // tempF: '' + ' &#176 F',
+      // tempC: '' + ' &#176 C',
       displayTemp: '',
+
+      units: '',
+
       iconCode: '',
       description: '',
       humidity: '',
+      dataWind: '',
       wind: '',
+      windUnit: '',
       welcomeText: '',
     });
   },
@@ -51,9 +56,13 @@ var App = React.createClass({
               iconCode: 'https://openweathermap.org/img/w/'+data.weather[0].icon+'.png',
               description: data.weather[0].description,
               humidity: data.main.humidity + "%",
-              wind: data.wind.speed + " mph",
+              dataWind: data.wind.speed,
+              wind: data.wind.speed,
+              windUnit: 'mph',
             });
-            component.getTempF();
+
+            //defaulting to setting the temp to Fahrenheit
+            component.convertF();
           });
         }
       )
@@ -62,18 +71,43 @@ var App = React.createClass({
       });
   },
 
-  getTempF: function(){
+  convertF: function(){
     this.setState({
       // displayTemp: this.state.tempF
       displayTemp: Math.floor(this.state.tempKel * (9/5) - 459.67),
+      wind: Math.floor((this.state.dataWind / 0.44704)),
+      windUnit: 'mph'
     })
   },
 
-  getTempC: function(){
+  convertMetric: function(){
     this.setState({
-      // displayTemp: this.state.tempC
       displayTemp: Math.floor(this.state.tempKel - 273.15),
-    })
+      wind: Math.floor((this.state.dataWind * 3.6)),
+      windUnit: 'km/h',
+    });
+  },
+
+  // getTempF: function(){
+  //   this.setState({
+  //     // displayTemp: this.state.tempF
+  //     displayTemp: Math.floor(this.state.tempKel * (9/5) - 459.67),
+  //   })
+  // },
+  //
+  // getTempC: function(){
+  //   this.setState({
+  //     // displayTemp: this.state.tempC
+  //     displayTemp: Math.floor(this.state.tempKel - 273.15),
+  //   })
+  // },
+
+  setWind: function(){
+    if(this.state.unit == 'metric'){
+      this.setState({
+        wind : 'kmph',
+      })
+    }
   },
 
   setWelcomeText: function(){
@@ -106,16 +140,16 @@ var App = React.createClass({
         <div className="temp-block">
           <h1>{this.state.displayTemp}</h1>
           <div className="unit-toggle">
-            <a onClick={this.getTempF}> &#176;F</a>
+            <a onClick={this.convertF}> &#176;F</a>
             <span> | </span>
-            <a onClick={this.getTempC}> &#176;C</a>
+            <a onClick={this.convertMetric}> &#176;C</a>
           </div>
         </div>
         <div className="description-wrap">
           <img src={this.state.iconCode} />
           <p>{this.state.description}</p>
           <p>Humidity : {this.state.humidity}</p>
-          <p>Wind: {this.state.wind}</p>
+          <p>Wind: {this.state.wind} {this.state.windUnit}</p>
         </div>
 
       </div>
