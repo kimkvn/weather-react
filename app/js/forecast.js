@@ -23,7 +23,7 @@ var Forecast = React.createClass({
     var weatherKey = '8ef93b3325212e85f516fd49083dd5f0';
     var latitude = 33.748995;
     var longitude = -84.387982;
-    var weatherURL = '//api.openweathermap.org/data/2.5/forecast?q=Atlanta&APPID='+weatherKey;
+    var weatherURL = '//api.openweathermap.org/data/2.5/forecast?q=Atlanta&APPID='+weatherKey+'&units=imperial';
 
     var component = this;
 
@@ -92,11 +92,11 @@ var Forecast = React.createClass({
   render: function(){
 
     return(
-      <div>
+      <div className="forecast-wrap">
         {
           this.state.forecast.map((day, index) => {
             return(
-              <div className="day-block col-xs-12">
+              <div key={index} className="day-block col-xs-12">
                 <div className="day-block-wrap row">
                   <div className="day-name col-xs-4 col-sm-12">
                     <h3>{day.dt_txt}</h3>
@@ -115,55 +115,6 @@ var Forecast = React.createClass({
         }
       </div>
     );
-
-    // return(
-    //   <div className="forecast-wrap row">
-    //     <div className="day-0 day-block col-xs-12 col-sm-4">
-    //       <div className="day-block-wrap row">
-    //
-    //             <div className="day-name col-xs-4 col-sm-12">
-    //               <h3>{this.state.day0}</h3>
-    //             </div>
-    //             <div className="img-wrap col-xs-4 col-sm-12">
-    //               <img src={this.state.day0Icon} />
-    //             </div>
-    //             <div className="high-low col-xs-4 col-sm-12">
-    //               <h5 className="high">{this.state.day0High}&#176;</h5>
-    //               <h5 className="low">{this.state.day0Low}&#176;</h5>
-    //             </div>
-    //       </div>
-    //
-    //     </div>
-    //     <div className="day-1 day-block col-xs-12 col-sm-4">
-    //     <div className="day-block-wrap row">
-    //       <div className="day-name col-xs-4 col-sm-12">
-    //         <h3>{this.state.day1}</h3>
-    //       </div>
-    //       <div className="img-wrap col-xs-4 col-sm-12">
-    //         <img src={this.state.day1Icon} />
-    //       </div>
-    //       <div className="high-low col-xs-4 col-sm-12">
-    //         <h5 className="high">{this.state.day1High}&#176;</h5>
-    //         <h5 className="low">{this.state.day1Low}&#176;</h5>
-    //       </div>
-    //     </div>
-    //     </div>
-    //     <div className="day-2 day-block col-xs-12 col-sm-4">
-    //     <div className="day-block-wrap row">
-    //       <div className="day-name col-xs-4 col-sm-12">
-    //         <h3>{this.state.day2}</h3>
-    //       </div>
-    //       <div className="img-wrap col-xs-4 col-sm-12">
-    //         <img src={this.state.day2Icon} />
-    //       </div>
-    //       <div className="high-low col-xs-4 col-sm-12">
-    //         <h5 className="high">{this.state.day2High}&#176;</h5>
-    //         <h5 className="low">{this.state.day2Low}&#176;</h5>
-    //       </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // )
   }
 });
 
