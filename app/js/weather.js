@@ -1,3 +1,44 @@
+var WelcomeMessage = React.createClass({
+  getInitialState: function(){
+    return({
+      welcomeText: '',
+    })
+  },
+
+  componentDidMount: function(){
+    this.setWelcomeText();
+  },
+
+  // setting a greeting depending on time of day
+  setWelcomeText: function(){
+    var time = (new Date()).getHours();
+    if( time < 5 && time >= 18 ){
+      this.setState({
+        welcomeText: 'Good Evening!',
+      })
+    }
+    else if( time >= 5 && time < 12 ){
+      this.setState({
+        welcomeText: 'Good Morning!',
+      })
+    }
+    else if( time >= 12 && time < 18 ){
+      this.setState({
+        welcomeText: 'Good Afternoon!',
+      })
+    }
+  },
+
+  render: function(){
+    return(
+      <div className="welcome-message">
+        <h4>{this.state.welcomeText}</h4>
+        The current temperature is:
+      </div>
+    )
+  }
+});
+
 var CurrentWeather = React.createClass({
   render: function(){
     return(
@@ -19,14 +60,6 @@ var CurrentDetails = React.createClass({
   }
 });
 
-// var CurrentWind = React.createClass({
-//
-//   render: function(){
-//     return(
-//       <p>Wind: {this.props.value} {this.props.unit}</p>
-//     )
-//   }
-// });
 
 var Weather = React.createClass({
 
@@ -40,7 +73,6 @@ var Weather = React.createClass({
       currentWind: '',
       windUnit: '',
       currentHumidity: '',
-      welcomeText: '',
       unitPref: '',
 
       forecast: [],
@@ -76,7 +108,6 @@ var Weather = React.createClass({
 
           forecast: json.daily.data,
         });
-        component.setWelcomeText();
       })
       .catch(function(err){
         console.log('Fetch Error:', err);
@@ -109,25 +140,6 @@ var Weather = React.createClass({
     }
   },
 
-  // setting a greeting depending on time of day
-  setWelcomeText: function(){
-    var time = (new Date()).getHours();
-    if( time < 5 && time >= 18 ){
-      this.setState({
-        welcomeText: 'Good Evening!',
-      })
-    }
-    else if( time >= 5 && time < 12 ){
-      this.setState({
-        welcomeText: 'Good Morning!',
-      })
-    }
-    else if( time >= 12 && time < 18 ){
-      this.setState({
-        welcomeText: 'Good Afternoon!',
-      })
-    }
-  },
 
   // returning a string day of the week from the 'time' data point obj in the Dark Sky API
   getWeekday: function(val){
@@ -181,10 +193,7 @@ var Weather = React.createClass({
       <div>
 
         <div className="current-temp-wrap">
-          <div className="welcome-message">
-            <h4>{this.state.welcomeText}</h4>
-            The current temperature is:
-          </div>
+          <WelcomeMessage />
           <div className="temp-block">
             <CurrentWeather value={this.state.currentTemp}/>
             <div className="unit-toggle">
