@@ -2,12 +2,15 @@ var ApiTest = React.createClass({
 
   getInitialState: function(){
     return({
+      dataTemp: '',
       currentTemp: '',
       currentIcon: '',
       currentDescription: '',
       currentWind: '',
+      windUnit: '',
       currentHumidity: '',
       welcomeText: '',
+      unitPref: '',
 
       forecast: [],
     });
@@ -30,11 +33,14 @@ var ApiTest = React.createClass({
       .then(function(json){
         console.log(json)
         component.setState({
+          dataTemp: Math.floor(json.currently.temperature),
           currentTemp: Math.floor(json.currently.temperature),
           currentIcon: json.currently.icon,
           currentDescription: json.currently.summary,
           currentWind: Math.floor(json.currently.windSpeed),
+          windUnit: 'mph',
           currentHumidity: Math.floor(json.currently.humidity),
+          unitPref: 'Imperial',
 
           forecast: json.daily.data,
         });
@@ -45,6 +51,48 @@ var ApiTest = React.createClass({
       })
   },
 
+  setUnitPref: function(){
+    if(this.state.unitPref == "Imperial"){
+      //convert to SI
+      this.convertToSi();
+      this.setState({
+        unitPref: 'SI',
+      });
+    }
+    else if(this.state.unitPref == "SI"){
+      //convert to F
+      this.convertToImp();
+      this.setState({
+        unitPref: 'Imperial',
+      });
+    }
+  },
+
+  convertToImp: function(){
+    if(this.state.unitPref == "SI"){
+      this.setState({
+        currentTemp: this.state.dataTemp,
+        unitPref: 'Imperial',
+        // wind: Math.floor((this.state.dataWind / 0.44704)),
+        // windUnit: 'mph',
+      })
+    }
+
+  },
+
+  convertToSi: function(){
+    if(this.state.unitPref == "Imperial"){
+      this.setState({
+        currentTemp: Math.floor((this.state.dataTemp - 32) * (9/5)),
+        unitPref: 'SI',
+        // wind: Math.floor((this.state.dataWind * 3.6)),
+        // windUnit: 'km/h',
+      });
+    }
+
+  },
+
+  // setting a greeting depending on time of day
   setWelcomeText: function(){
     var time = (new Date()).getHours();
     if( time < 5 && time >= 18 ){
@@ -122,16 +170,16 @@ var ApiTest = React.createClass({
           <div className="temp-block">
             <h1>{this.state.currentTemp}</h1>
             <div className="unit-toggle">
-              <a> &#176;F</a>
+              <a onClick={this.convertToImp}> &#176;F</a>
               <span> | </span>
-              <a> &#176;C</a>
+              <a onClick={this.convertToSi}> &#176;C</a>
             </div>
           </div>
           <div className="description-wrap">
             <i className={this.getIcon(this.state.currentIcon)}></i>
             <p>{this.state.currentDescription}</p>
             <p>Humidity : {this.state.currentHumidity}</p>
-            <p>Wind: {this.state.currentWind}</p>
+            <p>Wind: {this.state.currentWind} {this.state.windUnit}</p>
           </div>
         </div>
         <div clasName="forecast-wrap">
