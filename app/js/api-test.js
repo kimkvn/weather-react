@@ -36,9 +36,10 @@ var ApiTest = React.createClass({
       })
   },
 
+  // returning a string day of the week from the 'time' data point obj in the Darksky API
   getWeekday: function(val){
     var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-
+    // 'time' is a UNIX value. Needs to be multiplied by 1000 to return a UTC value that the Date() method can read correctly
     var index = (new Date(val * 1000)).getDay();
 
     return days[index];
