@@ -43,20 +43,37 @@ var ApiTest = React.createClass({
 
   getIcon: function(input){
     switch(input){
-  //     case "clear-day":
-  //     case "clear-night":
-  //     case "rain":
-  //     case "snow":
-  //     case "sleet":
-  //     case "wind":
-  //     case "fog":
-  //     case "cloudy":
+      case "clear-day":
+        return ("wi wi-day-sunny")
+        break;
+      case "clear-night":
+        return ("wi wi-night-clear")
+        break;
+      case "rain":
+        return ("wi wi-rain")
+        break;
+      case "snow":
+        return ("wi wi-snow")
+        break;
+      case "sleet":
+        return ("wi wi-sleet")
+        break;
+      case "wind":
+        return ("wi wi-strong-wind")
+        break;
+      case "fog":
+        return ("wi wi-fog")
+        break;
+      case "cloudy":
+        return ("wi wi-cloudy")
+        break;
       case "partly-cloudy-day":
         return ("wi wi-day-cloudy")
         break;
-  //     case "part-cloudy-night":
+      case "part-cloudy-night":
+        return ("wi-night-alt-cloudy")
       default:
-        return ("wi wi-day-sunny")
+        return ("wi wi-cloud")
         break;
     }
   },
