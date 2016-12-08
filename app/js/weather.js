@@ -1,13 +1,21 @@
 var CurrentWeather = React.createClass({
-  // getInitialState: function(){
-  //   return({
-  //     value: ''
-  //   })
-  // },
-
   render: function(){
     return(
       <h1>{this.props.value}</h1>
+    )
+  }
+});
+
+var CurrentWind = React.createClass({
+  getInitialState: function(){
+    return({
+      windUnit: '',
+    })
+  },
+
+  render: function(){
+    return(
+      <p>Wind: {this.props.value} {this.props.unit}</p>
     )
   }
 });
@@ -163,7 +171,6 @@ var Weather = React.createClass({
   render: function(){
     return(
       <div>
-        <CurrentWeather value={this.state.currentTemp}/>
 
         <div className="current-temp-wrap">
           <div className="welcome-message">
@@ -171,7 +178,7 @@ var Weather = React.createClass({
             The current temperature is:
           </div>
           <div className="temp-block">
-            <h1>{this.state.currentTemp}</h1>
+            <CurrentWeather value={this.state.currentTemp}/>
             <div className="unit-toggle">
               <a onClick={this.convertToImp}> &#176;F</a>
               <span> | </span>
@@ -182,7 +189,10 @@ var Weather = React.createClass({
             <i className={this.getIcon(this.state.currentIcon)}></i>
             <p>{this.state.currentDescription}</p>
             <p>Humidity : {this.state.currentHumidity}%</p>
-            <p>Wind: {this.state.currentWind} {this.state.windUnit}</p>
+            <CurrentWind
+              value={this.state.currentWind}
+              unit={this.state.windUnit}
+            />
           </div>
         </div>
 
