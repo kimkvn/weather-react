@@ -3,6 +3,7 @@ var ApiTest = React.createClass({
   getInitialState: function(){
     return({
       dataTemp: '',
+      dataWind: '',
       currentTemp: '',
       currentIcon: '',
       currentDescription: '',
@@ -37,6 +38,7 @@ var ApiTest = React.createClass({
           currentTemp: Math.floor(json.currently.temperature),
           currentIcon: json.currently.icon,
           currentDescription: json.currently.summary,
+          dataWind: Math.floor(json.currently.windSpeed),
           currentWind: Math.floor(json.currently.windSpeed),
           windUnit: 'mph',
           currentHumidity: Math.floor(json.currently.humidity),
@@ -73,8 +75,8 @@ var ApiTest = React.createClass({
       this.setState({
         currentTemp: this.state.dataTemp,
         unitPref: 'Imperial',
-        // wind: Math.floor((this.state.dataWind / 0.44704)),
-        // windUnit: 'mph',
+        currentWind: this.state.dataWind,
+        windUnit: 'mph',
       })
     }
 
@@ -85,8 +87,8 @@ var ApiTest = React.createClass({
       this.setState({
         currentTemp: Math.floor((this.state.dataTemp - 32) * (9/5)),
         unitPref: 'SI',
-        // wind: Math.floor((this.state.dataWind * 3.6)),
-        // windUnit: 'km/h',
+        currentWind: Math.floor((this.state.dataWind * 1.609344)),
+        windUnit: 'km/h',
       });
     }
 
