@@ -2,6 +2,13 @@ var ApiTest = React.createClass({
 
   getInitialState: function(){
     return({
+      currentTemp: '',
+      currentIcon: '',
+      currentDescription: '',
+      currentWind: '',
+      currentHumidity: '',
+      welcomeText: '',
+
       forecast: [],
     });
   },
@@ -23,17 +30,41 @@ var ApiTest = React.createClass({
       .then(function(json){
         console.log(json)
         component.setState({
+          currentTemp: Math.floor(json.currently.temperature),
+          currentIcon: json.currently.icon,
+          currentDescription: json.currently.summary,
+          currentWind: Math.floor(json.currently.windSpeed),
+          currentHumidity: Math.floor(json.currently.humidity),
+
           forecast: json.daily.data,
         });
+        component.setWelcomeText();
       })
       .catch(function(err){
         console.log('Fetch Error:', err);
       })
   },
 
+  setWelcomeText: function(){
+    var time = (new Date()).getHours();
+    if( time < 5 && time >= 18 ){
+      this.setState({
+        welcomeText: 'Good Evening!',
+      })
+    }
+    else if( time >= 5 && time < 12 ){
+      this.setState({
+        welcomeText: 'Good Morning!',
+      })
+    }
+    else if( time >= 12 && time < 18 ){
+      this.setState({
+        welcomeText: 'Good Afternoon!',
+      })
+    }
+  },
 
-
-  // returning a string day of the week from the 'time' data point obj in the Darksky API
+  // returning a string day of the week from the 'time' data point obj in the Dark Sky API
   getWeekday: function(val){
     var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     // 'time' is returned as a UNIX value. Needs to be multiplied by 1000 to return a UTC value that the Date() method can read correctly
@@ -41,6 +72,8 @@ var ApiTest = React.createClass({
     return days[index];
   },
 
+  // setting an icon dependent on the 'icon' data point value from the Dark Sky API
+  // weather icons from https://github.com/erikflowers/weather-icons/
   getIcon: function(input){
     switch(input){
       case "clear-day":
@@ -80,28 +113,49 @@ var ApiTest = React.createClass({
 
   render: function(){
     return(
-      <div clasName="forecast-wrap">
-        {
-          this.state.forecast.map((day, index) => {
-            return(
-              <div key={index} className="day-block col-xs-12">
-                <div className="day-block-wrap row">
-                  <div className="day-name col-xs-4 col-sm-12">
-                    <h3>{this.getWeekday(day.time)}</h3>
-                  </div>
-                  <div className="img-wrap">
-                    <i className={this.getIcon(day.icon)}></i>
-                  </div>
-                  <div className="high-low col-xs-4 col-sm-12">
-                    <h5 className="high">{Math.floor(day.temperatureMax)}&#176;</h5>
-                    <h5 className="low">{Math.floor(day.temperatureMin)}&#176;</h5>
+      <div>
+        <div className="current-temp-wrap">
+          <div className="welcome-message">
+            <h4>{this.state.welcomeText}</h4>
+            The current temperature is:
+          </div>
+          <div className="temp-block">
+            <h1>{this.state.currentTemp}</h1>
+            <div className="unit-toggle">
+              <a> &#176;F</a>
+              <span> | </span>
+              <a> &#176;C</a>
+            </div>
+          </div>
+          <div className="description-wrap">
+            <i className={this.getIcon(this.state.currentIcon)}></i>
+            <p>{this.state.currentDescription}</p>
+            <p>Humidity : {this.state.currentHumidity}</p>
+            <p>Wind: {this.state.currentWind}</p>
+          </div>
+        </div>
+        <div clasName="forecast-wrap">
+          {
+            this.state.forecast.map((day, index) => {
+              return(
+                <div key={index} className="day-block col-xs-12">
+                  <div className="day-block-wrap row">
+                    <div className="day-name col-xs-4 col-sm-12">
+                      <h3>{this.getWeekday(day.time)}</h3>
+                    </div>
+                    <div className="img-wrap col-xs-4 col-sm-12">
+                      <i className={this.getIcon(day.icon)}></i>
+                    </div>
+                    <div className="high-low col-xs-4 col-sm-12">
+                      <h5 className="high">{Math.floor(day.temperatureMax)}&#176;</h5>
+                      <h5 className="low">{Math.floor(day.temperatureMin)}&#176;</h5>
+                    </div>
                   </div>
                 </div>
-
-              </div>
-            );
-          })
-        }
+              );
+            })
+          }
+        </div>
       </div>
     )
   }
