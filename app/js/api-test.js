@@ -3,7 +3,6 @@ var ApiTest = React.createClass({
   getInitialState: function(){
     return({
       forecast: [],
-      time: '',
     });
   },
 
@@ -25,34 +24,42 @@ var ApiTest = React.createClass({
         console.log(json)
         component.setState({
           forecast: json.daily.data,
-          time: json.daily.data[0].time,
         });
-        //note: data.daily.time is a unix time stamp - multiply this value by 1000
-        //to get milliseconds, which you can then new Date() and get
-        //get the correct response
       })
       .catch(function(err){
         console.log('Fetch Error:', err);
       })
   },
 
+
+
   // returning a string day of the week from the 'time' data point obj in the Darksky API
   getWeekday: function(val){
     var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-    // 'time' is a UNIX value. Needs to be multiplied by 1000 to return a UTC value that the Date() method can read correctly
+    // 'time' is returned as a UNIX value. Needs to be multiplied by 1000 to return a UTC value that the Date() method can read correctly
     var index = (new Date(val * 1000)).getDay();
-
     return days[index];
   },
 
   render: function(){
     return(
-      <div>
+      <div clasName="forecast-wrap">
         {
           this.state.forecast.map((day, index) => {
             return(
-              <div key={index}>
-                <h2>{this.getWeekday(day.time)}</h2>
+              <div key={index} className="day-block col-xs-12">
+                <div className="day-block-wrap row">
+                  <div className="day-name col-xs-4 col-sm-12">
+                    <h3>{this.getWeekday(day.time)}</h3>
+                  </div>
+                  <div className="img-wrap">
+                  </div>
+                  <div className="high-low col-xs-4 col-sm-12">
+                    <h5 className="high">{Math.floor(day.temperatureMax)}&#176;</h5>
+                    <h5 className="low">{Math.floor(day.temperatureMin)}&#176;</h5>
+                  </div>
+                </div>
+
               </div>
             );
           })
