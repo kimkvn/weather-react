@@ -70,18 +70,9 @@ var ApiTest = React.createClass({
     }
   },
 
-  convertToImp: function(){
-    if(this.state.unitPref == "SI"){
-      this.setState({
-        currentTemp: this.state.dataTemp,
-        unitPref: 'Imperial',
-        currentWind: this.state.dataWind,
-        windUnit: 'mph',
-      })
-    }
-
-  },
-
+  // By default, the API call returns values in Imperial units. Converting to SI
+  // will require the right formulas, and converting back to Imperial simply
+  // involves setting the original values returned.
   convertToSi: function(){
     if(this.state.unitPref == "Imperial"){
       this.setState({
@@ -91,7 +82,17 @@ var ApiTest = React.createClass({
         windUnit: 'km/h',
       });
     }
+  },
 
+  convertToImp: function(){
+    if(this.state.unitPref == "SI"){
+      this.setState({
+        currentTemp: this.state.dataTemp,
+        unitPref: 'Imperial',
+        currentWind: this.state.dataWind,
+        windUnit: 'mph',
+      })
+    }
   },
 
   // setting a greeting depending on time of day
@@ -180,7 +181,7 @@ var ApiTest = React.createClass({
           <div className="description-wrap">
             <i className={this.getIcon(this.state.currentIcon)}></i>
             <p>{this.state.currentDescription}</p>
-            <p>Humidity : {this.state.currentHumidity}</p>
+            <p>Humidity : {this.state.currentHumidity}%</p>
             <p>Wind: {this.state.currentWind} {this.state.windUnit}</p>
           </div>
         </div>
