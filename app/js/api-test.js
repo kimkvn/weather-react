@@ -41,6 +41,26 @@ var ApiTest = React.createClass({
     return days[index];
   },
 
+  getIcon: function(input){
+    switch(input){
+  //     case "clear-day":
+  //     case "clear-night":
+  //     case "rain":
+  //     case "snow":
+  //     case "sleet":
+  //     case "wind":
+  //     case "fog":
+  //     case "cloudy":
+      case "partly-cloudy-day":
+        return ("wi wi-day-cloudy")
+        break;
+  //     case "part-cloudy-night":
+      default:
+        return ("wi wi-day-sunny")
+        break;
+    }
+  },
+
   render: function(){
     return(
       <div clasName="forecast-wrap">
@@ -53,6 +73,7 @@ var ApiTest = React.createClass({
                     <h3>{this.getWeekday(day.time)}</h3>
                   </div>
                   <div className="img-wrap">
+                    <i className={this.getIcon(day.icon)}></i>
                   </div>
                   <div className="high-low col-xs-4 col-sm-12">
                     <h5 className="high">{Math.floor(day.temperatureMax)}&#176;</h5>
