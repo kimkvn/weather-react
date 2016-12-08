@@ -1,4 +1,4 @@
-var ApiTest = React.createClass({
+var Weather = React.createClass({
 
   getInitialState: function(){
     return({
@@ -53,22 +53,6 @@ var ApiTest = React.createClass({
       })
   },
 
-  setUnitPref: function(){
-    if(this.state.unitPref == "Imperial"){
-      //convert to SI
-      this.convertToSi();
-      this.setState({
-        unitPref: 'SI',
-      });
-    }
-    else if(this.state.unitPref == "SI"){
-      //convert to F
-      this.convertToImp();
-      this.setState({
-        unitPref: 'Imperial',
-      });
-    }
-  },
 
   // By default, the API call returns values in Imperial units. Converting to SI
   // will require the right formulas, and converting back to Imperial simply
@@ -212,4 +196,4 @@ var ApiTest = React.createClass({
   }
 });
 
-ReactDOM.render(<ApiTest />, document.getElementById('api-test'));
+ReactDOM.render(<Weather />, document.getElementById('weather'));
