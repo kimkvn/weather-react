@@ -1,3 +1,17 @@
+var CurrentWeather = React.createClass({
+  // getInitialState: function(){
+  //   return({
+  //     value: ''
+  //   })
+  // },
+
+  render: function(){
+    return(
+      <h1>{this.props.value}</h1>
+    )
+  }
+});
+
 var Weather = React.createClass({
 
   getInitialState: function(){
@@ -149,6 +163,8 @@ var Weather = React.createClass({
   render: function(){
     return(
       <div>
+        <CurrentWeather value={this.state.currentTemp}/>
+
         <div className="current-temp-wrap">
           <div className="welcome-message">
             <h4>{this.state.welcomeText}</h4>
@@ -169,6 +185,8 @@ var Weather = React.createClass({
             <p>Wind: {this.state.currentWind} {this.state.windUnit}</p>
           </div>
         </div>
+
+
         <div clasName="forecast-wrap">
           {
             this.state.forecast.map((day, index) => {
