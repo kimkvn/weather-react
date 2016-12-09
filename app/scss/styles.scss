@@ -78,16 +78,29 @@ body{
     .day-block{
       display: inline-block;
       float: none;
-      padding: 0;
+      padding: 1ex 0;
       width: 12%;
+
+      .day-name{
+        h3{
+          margin-top: 10px;
+        }
+      }
+
+      .img-wrap{
+        margin-top: 1ex;
+        margin-bottom: 1.5ex;
+      }
 
       .high-low{
         padding: 0;
         h3{
           font-size: 1.5em;
         }
+
         h5{
           font-size: 1em;
+          // margin-bottom: 1.5ex;
           padding-left: 1ex;
         }
       }

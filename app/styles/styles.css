@@ -47,8 +47,13 @@ body {
   .forecast-wrap .day-block {
     display: inline-block;
     float: none;
-    padding: 0;
+    padding: 1ex 0;
     width: 12%; }
+    .forecast-wrap .day-block .day-name h3 {
+      margin-top: 10px; }
+    .forecast-wrap .day-block .img-wrap {
+      margin-top: 1ex;
+      margin-bottom: 1.5ex; }
     .forecast-wrap .day-block .high-low {
       padding: 0; }
       .forecast-wrap .day-block .high-low h3 {
