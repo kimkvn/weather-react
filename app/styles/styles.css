@@ -44,10 +44,15 @@ body {
         color: gray; }
 
 @media (min-width: 768px) {
-  .day-block {
+  .forecast-wrap .day-block {
     display: inline-block;
     float: none;
     padding: 0;
     width: 12%; }
-  .high-low h5 {
-    padding-left: 1ex; } }
+    .forecast-wrap .day-block .high-low {
+      padding: 0; }
+      .forecast-wrap .day-block .high-low h3 {
+        font-size: 1.5em; }
+      .forecast-wrap .day-block .high-low h5 {
+        font-size: 1em;
+        padding-left: 1ex; } }
