@@ -42,7 +42,7 @@ var WelcomeMessage = React.createClass({
 var CurrentWeather = React.createClass({
   render: function(){
     return(
-      <h1>{this.props.value}</h1>
+      <h1>{this.props.unitPref == "Imperial" ? Math.floor(this.props.value) : Math.floor((this.props.value - 32) * (5/9)) }</h1>
     )
   }
 });
@@ -54,35 +54,14 @@ var CurrentDetails = React.createClass({
         <i className={this.props.icon}></i>
         <p>{this.props.description}</p>
         <p>Humidity : {this.props.humidity}%</p>
-        <p>Wind: {this.props.wind} {this.props.unit}</p>
+        <p>Wind: {this.props.unitPref == "Imperial" ? this.props.wind : Math.floor((this.props.wind * 1.609344)) } {this.props.unitPref == "Imperial" ? "mph" : "km/h"}
+        </p>
       </div>
     )
   }
 });
 
 var Forecast = React.createClass({
-
-  //method to watch if parent.state.unitPref changes
-    //convert high-low if true
-
-  getInitialState: function(){
-    return({
-      forecastHighC:[],
-      forecastLowC:[],
-    })
-  },
-
-  /*  potential idea?   */
-  // componentDidMount: function(){
-  //   var highs = [];
-  //   this.props.item.forEach(function(index){
-  //     highs.push(index.temperatureMax)
-  //   });
-  //   var component = this;
-  //   component.setState({
-  //     forecastHighC: highs
-  //   })
-  // },
 
   // returning a string day of the week from the 'time' data point obj in the Dark Sky API
   getWeekday: function(val){
@@ -133,8 +112,6 @@ var Weather = React.createClass({
       currentTemp: '',
       currentIcon: '',
       currentDescription: '',
-      currentWind: '',
-      windUnit: '',
       currentHumidity: '',
       unitPref: '',
 
@@ -164,8 +141,6 @@ var Weather = React.createClass({
           currentIcon: json.currently.icon,
           currentDescription: json.currently.summary,
           dataWind: Math.floor(json.currently.windSpeed),
-          currentWind: Math.floor(json.currently.windSpeed),
-          windUnit: 'mph',
           currentHumidity: Math.floor(json.currently.humidity),
           unitPref: 'Imperial',
 
@@ -180,24 +155,18 @@ var Weather = React.createClass({
   // By default, the API call returns values in Imperial units. Converting to SI
   // will require the right formulas, and converting back to Imperial simply
   // involves setting the original values returned.
-  convertToSi: function(){
+  handleSi: function(){
     if(this.state.unitPref == "Imperial"){
       this.setState({
-        currentTemp: Math.floor((this.state.dataTemp - 32) * (5/9)),
         unitPref: 'SI',
-        currentWind: Math.floor((this.state.dataWind * 1.609344)),
-        windUnit: 'km/h',
       });
     }
   },
 
-  convertToImp: function(){
+  handleImp: function(){
     if(this.state.unitPref == "SI"){
       this.setState({
-        currentTemp: this.state.dataTemp,
         unitPref: 'Imperial',
-        currentWind: this.state.dataWind,
-        windUnit: 'mph',
       })
     }
   },
@@ -249,19 +218,19 @@ var Weather = React.createClass({
         <div className="current-temp-wrap">
           <WelcomeMessage />
           <div className="temp-block">
-            <CurrentWeather value={this.state.currentTemp}/>
+            <CurrentWeather value={this.state.currentTemp} unitPref={this.state.unitPref}/>
             <div className="unit-toggle">
-              <a onClick={this.convertToImp}> &#176;F</a>
+              <a onClick={this.handleImp}> &#176;F</a>
               <span> | </span>
-              <a onClick={this.convertToSi}> &#176;C</a>
+              <a onClick={this.handleSi}> &#176;C</a>
             </div>
           </div>
           <CurrentDetails
             icon = {this.getIcon(this.state.currentIcon)}
             description = {this.state.currentDescription}
             humidity = {this.state.currentHumidity}
-            wind = {this.state.currentWind}
-            unit = {this.state.windUnit}
+            wind = {this.state.dataWind}
+            unitPref = {this.state.unitPref}
           />
         </div>
 
@@ -269,8 +238,6 @@ var Weather = React.createClass({
           item={this.state.forecast}
           unitPref={this.state.unitPref}
           getIcon={this.getIcon}
-          convertToSi={this.convertToSi}
-          convertToImp={this.convertToImp}
         />
       </div>
     )
