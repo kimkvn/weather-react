@@ -107,8 +107,12 @@ var Forecast = React.createClass({
                     <i className={this.props.getIcon(day.icon)}></i>
                   </div>
                   <div className="high-low col-xs-4 col-sm-12">
-                    <h5 className="high">{Math.floor(day.temperatureMax)}&#176;</h5>
-                    <h5 className="low">{Math.floor(day.temperatureMin)}&#176;</h5>
+                    <h5 className="high">{
+                        this.props.unitPref == "Imperial" ? Math.floor(day.temperatureMax) : Math.floor((day.temperatureMax - 32) * (5/9))
+                      }&#176;</h5>
+                    <h5 className="low">{
+                        this.props.unitPref == "Imperial" ? Math.floor(day.temperatureMin) : Math.floor((day.temperatureMin - 32) * (5/9))
+                      }&#176;</h5>
                   </div>
                 </div>
               </div>
@@ -179,7 +183,7 @@ var Weather = React.createClass({
   convertToSi: function(){
     if(this.state.unitPref == "Imperial"){
       this.setState({
-        currentTemp: Math.floor((this.state.dataTemp - 32) * (9/5)),
+        currentTemp: Math.floor((this.state.dataTemp - 32) * (5/9)),
         unitPref: 'SI',
         currentWind: Math.floor((this.state.dataWind * 1.609344)),
         windUnit: 'km/h',
