@@ -107,8 +107,7 @@ var Weather = React.createClass({
 
   getInitialState: function(){
     return({
-      dataTemp: '',
-      dataWind: '',
+      currentWind: '',
       currentTemp: '',
       currentIcon: '',
       currentDescription: '',
@@ -136,11 +135,10 @@ var Weather = React.createClass({
       .then(function(json){
         console.log(json)
         component.setState({
-          dataTemp: Math.floor(json.currently.temperature),
           currentTemp: Math.floor(json.currently.temperature),
           currentIcon: json.currently.icon,
           currentDescription: json.currently.summary,
-          dataWind: Math.floor(json.currently.windSpeed),
+          currentWind: Math.floor(json.currently.windSpeed),
           currentHumidity: Math.floor(json.currently.humidity),
           unitPref: 'Imperial',
 
@@ -229,7 +227,7 @@ var Weather = React.createClass({
             icon = {this.getIcon(this.state.currentIcon)}
             description = {this.state.currentDescription}
             humidity = {this.state.currentHumidity}
-            wind = {this.state.dataWind}
+            wind = {this.state.currentWind}
             unitPref = {this.state.unitPref}
           />
         </div>
