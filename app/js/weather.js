@@ -150,9 +150,6 @@ var Weather = React.createClass({
       })
   },
 
-  // By default, the API call returns values in Imperial units. Converting to SI
-  // will require the right formulas, and converting back to Imperial simply
-  // involves setting the original values returned.
   handleSi: function(){
     if(this.state.unitPref == "Imperial"){
       this.setState({
@@ -168,7 +165,6 @@ var Weather = React.createClass({
       })
     }
   },
-
 
   // setting an icon dependent on the 'icon' data point value from the Dark Sky API
   // weather icons from https://github.com/erikflowers/weather-icons/
