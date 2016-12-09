@@ -62,6 +62,28 @@ var CurrentDetails = React.createClass({
 
 var Forecast = React.createClass({
 
+  //method to watch if parent.state.unitPref changes
+    //convert high-low if true
+
+  getInitialState: function(){
+    return({
+      forecastHighC:[],
+      forecastLowC:[],
+    })
+  },
+
+  /*  potential idea?   */
+  // componentDidMount: function(){
+  //   var highs = [];
+  //   this.props.item.forEach(function(index){
+  //     highs.push(index.temperatureMax)
+  //   });
+  //   var component = this;
+  //   component.setState({
+  //     forecastHighC: highs
+  //   })
+  // },
+
   // returning a string day of the week from the 'time' data point obj in the Dark Sky API
   getWeekday: function(val){
     var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -241,7 +263,10 @@ var Weather = React.createClass({
 
         <Forecast
           item={this.state.forecast}
+          unitPref={this.state.unitPref}
           getIcon={this.getIcon}
+          convertToSi={this.convertToSi}
+          convertToImp={this.convertToImp}
         />
       </div>
     )
