@@ -3,6 +3,7 @@ body {
   color: white; }
 
 .current-temp-wrap {
+  margin-top: 2em;
   text-align: center; }
   .current-temp-wrap .temp-block {
     position: relative;

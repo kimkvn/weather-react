@@ -53,8 +53,9 @@ var CurrentDetails = React.createClass({
       <div className="description-wrap">
         <i className={this.props.icon}></i>
         <p>{this.props.description}</p>
+        <p>Precipitation : {this.props.precip}%</p>
         <p>Humidity : {this.props.humidity}%</p>
-        <p>Wind: {this.props.unitPref == "Imperial" ? this.props.wind : Math.floor((this.props.wind * 1.609344)) } {this.props.unitPref == "Imperial" ? "mph" : "km/h"}
+        <p>Wind : {this.props.unitPref == "Imperial" ? this.props.wind : Math.floor((this.props.wind * 1.609344)) } {this.props.unitPref == "Imperial" ? "mph" : "km/h"}
         </p>
       </div>
     )
@@ -112,6 +113,7 @@ var Weather = React.createClass({
       currentIcon: '',
       currentDescription: '',
       currentHumidity: '',
+      currentPrecip: '',
       unitPref: '',
 
       forecast: [],
@@ -140,6 +142,7 @@ var Weather = React.createClass({
           currentDescription: json.currently.summary,
           currentWind: Math.floor(json.currently.windSpeed),
           currentHumidity: Math.floor(json.currently.humidity),
+          currentPrecip: json.currently.precipProbability,
           unitPref: 'Imperial',
 
           forecast: json.daily.data,
@@ -212,7 +215,10 @@ var Weather = React.createClass({
         <div className="current-temp-wrap">
           <WelcomeMessage />
           <div className="temp-block">
-            <CurrentWeather value={this.state.currentTemp} unitPref={this.state.unitPref}/>
+            <CurrentWeather
+              value={this.state.currentTemp}
+              unitPref={this.state.unitPref}
+            />
             <div className="unit-toggle">
               <a onClick={this.handleImp}> &#176;F</a>
               <span> | </span>
@@ -225,6 +231,7 @@ var Weather = React.createClass({
             humidity = {this.state.currentHumidity}
             wind = {this.state.currentWind}
             unitPref = {this.state.unitPref}
+            precip={Math.floor(this.state.currentPrecip * 100)}
           />
         </div>
 
