@@ -14,8 +14,8 @@ body {
       right: 5em; }
   .current-temp-wrap .description-wrap {
     text-transform: capitalize; }
-    .current-temp-wrap .description-wrap img {
-      width: 10em; }
+    .current-temp-wrap .description-wrap i {
+      font-size: 5em; }
 
 .forecast-wrap {
   margin: 0; }
@@ -30,6 +30,8 @@ body {
       display: inline-block; }
     .forecast-wrap .day-block .img-wrap {
       display: inline-block; }
+      .forecast-wrap .day-block .img-wrap i {
+        font-size: 2em; }
     .forecast-wrap .day-block .high-low {
       display: inline-block;
       position: relative; }

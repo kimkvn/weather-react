@@ -1,11 +1,3 @@
-// @font-face{
-//   font-family: 'weather';
-//   src: url('../fonts/weather-icon-font/weathericons-regular-webfont.svg') format('svg'),
-//        url('../fonts/weather-icon-font/weathericons-regular-webfont.ttf') format('truetype'),
-//        url('../fonts/weather-icon-font/weathericons-regular-webfont.woff') format('woff'),
-//        url('../fonts/weather-icon-font/weathericons-regular-webfont.woff2') format('woff2');
-// }
-
 body{
   background: #393E41;
   // border: 1px solid blue;
@@ -15,18 +7,10 @@ body{
 .current-temp-wrap{
   text-align: center;
 
-  .welcome-message{
-
-  }
-
   .temp-block{
     position: relative;
     margin: 0 auto;
     max-width: 20em;
-
-    h1{
-
-    }
 
     .unit-toggle{
       position: absolute;
@@ -37,8 +21,8 @@ body{
 
   .description-wrap{
     text-transform: capitalize;
-    img{
-      width: 10em;
+    i{
+      font-size: 5em;
     }
   }
 }
@@ -65,8 +49,9 @@ body{
     .img-wrap{
       // padding: 2.5ex;
       display: inline-block;
-      img{
-        // width: 8em;
+
+      i{
+        font-size: 2em;
       }
     }
 
@@ -79,7 +64,6 @@ body{
         display: inline-block;
         font-size: 1.5em;
         margin-right: 0.5ex;
-        // padding-left: 1ex;
 
       }
       .low{
