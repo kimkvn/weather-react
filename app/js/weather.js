@@ -121,6 +121,47 @@ var Weather = React.createClass({
   },
 
   componentDidMount: function(){
+
+    var latitude;
+    var longitude;
+
+    var component = this;
+
+    // if (navigator.geolocation){
+    //   navigator.geolocation.getCurrentPosition(function(position){
+    //     var latitude = position.coords.latitude;
+    //     var longitude = position.coords.longitude;
+    //     console.log(latitude, longitude)
+    //
+    //     component.getWeather();
+    //   })
+    // }
+
+    new Promise(
+      function(resolve, reject){
+
+        if (navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(function(position){
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            console.log(latitude, longitude)
+          })
+        }
+      }
+    ).then(
+      this.getWeather()
+    ).catch(
+      function(err){
+        console.log('Rejected promise: '+err)
+      }
+    )
+
+
+
+  },
+
+  getWeather: function(){
+
     var latitude = 33.748995;
     var longitude = -84.387982;
     var key = '9015e70a6b3a67646b7b52980ff99846';
@@ -128,8 +169,9 @@ var Weather = React.createClass({
 
     var component = this;
 
+
     fetchJsonp(weatherURL, {
-      timeout: 3000
+      timeout: 5000
     })
       .then(function(response){
         return response.json()
