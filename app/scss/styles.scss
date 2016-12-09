@@ -29,8 +29,8 @@ body{
 
 
 .forecast-wrap{
-  // border: 1px solid purple;
   margin: 0;
+  text-align: center;
   .day-block-wrap{
     border: 1px solid white;
     margin: 1ex;
@@ -74,6 +74,12 @@ body{
 }
 
 @media(min-width: 768px){
+  .day-block{
+    display: inline-block;
+    float: none;
+    padding: 0;
+    width: 12%;
+  }
   .high-low{
     h5{
       padding-left: 1ex;

@@ -18,7 +18,8 @@ body {
       font-size: 5em; }
 
 .forecast-wrap {
-  margin: 0; }
+  margin: 0;
+  text-align: center; }
   .forecast-wrap .day-block-wrap {
     border: 1px solid white;
     margin: 1ex; }
@@ -43,5 +44,10 @@ body {
         color: gray; }
 
 @media (min-width: 768px) {
+  .day-block {
+    display: inline-block;
+    float: none;
+    padding: 0;
+    width: 12%; }
   .high-low h5 {
     padding-left: 1ex; } }

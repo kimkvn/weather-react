@@ -77,7 +77,7 @@ var Forecast = React.createClass({
         {
           this.props.item.map((day, index) => {
             return(
-              <div key={index} className="day-block col-xs-12">
+              <div key={index} className="day-block col-xs-12 col-sm-2">
                 <div className="day-block-wrap row">
                   <div className="day-name col-xs-4 col-sm-12">
                     <h3>{this.getWeekday(day.time)}</h3>
