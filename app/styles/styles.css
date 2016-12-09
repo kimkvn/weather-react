@@ -13,14 +13,17 @@ body {
       position: absolute;
       top: 0;
       right: 5em; }
-      .current-temp-wrap .temp-block .unit-toggle a:hover {
-        color: white;
-        cursor: pointer;
-        text-decoration: none; }
+      .current-temp-wrap .temp-block .unit-toggle a {
+        color: #1098F7; }
+        .current-temp-wrap .temp-block .unit-toggle a:hover {
+          color: white;
+          cursor: pointer;
+          text-decoration: none; }
   .current-temp-wrap .description-wrap {
     text-transform: capitalize; }
     .current-temp-wrap .description-wrap i {
       font-size: 5em;
+      margin-top: 0.25ex;
       margin-bottom: 0.5ex; }
 
 .forecast-wrap {
