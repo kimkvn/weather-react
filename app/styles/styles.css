@@ -12,8 +12,10 @@ body {
       position: absolute;
       top: 0;
       right: 5em; }
-  .current-temp-wrap .description-wrap img {
-    width: 10em; }
+  .current-temp-wrap .description-wrap {
+    text-transform: capitalize; }
+    .current-temp-wrap .description-wrap img {
+      width: 10em; }
 
 .forecast-wrap {
   margin: 0; }
