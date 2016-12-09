@@ -12,7 +12,7 @@ var WelcomeMessage = React.createClass({
   // setting a greeting depending on time of day
   setWelcomeText: function(){
     var time = (new Date()).getHours();
-    if( time < 5 && time >= 18 ){
+    if( time < 5 || time >= 18 ){
       this.setState({
         welcomeText: 'Good Evening!',
       })
