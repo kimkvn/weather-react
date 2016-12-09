@@ -20,7 +20,8 @@ body {
   .current-temp-wrap .description-wrap {
     text-transform: capitalize; }
     .current-temp-wrap .description-wrap i {
-      font-size: 5em; }
+      font-size: 5em;
+      margin-bottom: 0.5ex; }
 
 .forecast-wrap {
   margin: 3em 0 0 0;
