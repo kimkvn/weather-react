@@ -29,12 +29,15 @@ body {
       float: none; }
     .forecast-wrap .day-block .day-name {
       display: inline-block; }
+      .forecast-wrap .day-block .day-name h3 {
+        font-size: 1.5em; }
     .forecast-wrap .day-block .img-wrap {
       display: inline-block; }
       .forecast-wrap .day-block .img-wrap i {
         font-size: 2em; }
     .forecast-wrap .day-block .high-low {
       display: inline-block;
+      padding: 0;
       position: relative; }
       .forecast-wrap .day-block .high-low h5 {
         display: inline-block;

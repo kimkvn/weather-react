@@ -44,6 +44,10 @@ body{
     .day-name{
       // padding: 2ex;
       display: inline-block;
+
+      h3{
+        font-size: 1.5em;
+      }
     }
 
     .img-wrap{
@@ -57,7 +61,7 @@ body{
 
     .high-low{
       display: inline-block;
-      // padding: 2.5ex;
+      padding: 0;
       position: relative;
 
       h5{
