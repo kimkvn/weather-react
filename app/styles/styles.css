@@ -12,13 +12,17 @@ body {
       position: absolute;
       top: 0;
       right: 5em; }
+      .current-temp-wrap .temp-block .unit-toggle a:hover {
+        color: white;
+        cursor: pointer;
+        text-decoration: none; }
   .current-temp-wrap .description-wrap {
     text-transform: capitalize; }
     .current-temp-wrap .description-wrap i {
       font-size: 5em; }
 
 .forecast-wrap {
-  margin: 0;
+  margin: 3em 0 0 0;
   text-align: center; }
   .forecast-wrap .day-block-wrap {
     border: 1px solid white;

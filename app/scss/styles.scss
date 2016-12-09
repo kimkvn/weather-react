@@ -1,6 +1,5 @@
 body{
   background: #393E41;
-  // border: 1px solid blue;
   color: white;
 }
 
@@ -16,6 +15,17 @@ body{
       position: absolute;
       top: 0;
       right: 5em;
+
+      a{
+        // border: 1px solid white;
+        // border-radius: 15px;
+        // padding: 4px;
+        &:hover{
+          color: white;
+          cursor: pointer;
+          text-decoration: none;
+        }
+      }
     }
   }
 
@@ -29,7 +39,7 @@ body{
 
 
 .forecast-wrap{
-  margin: 0;
+  margin: 3em 0 0 0;
   text-align: center;
   .day-block-wrap{
     border: 1px solid white;

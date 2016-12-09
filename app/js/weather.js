@@ -198,7 +198,7 @@ var Weather = React.createClass({
         return ("wi wi-day-cloudy")
         break;
       case "part-cloudy-night":
-        return ("wi-night-alt-cloudy")
+        return ("wi wi-night-alt-cloudy")
       default:
         return ("wi wi-cloud")
         break;
