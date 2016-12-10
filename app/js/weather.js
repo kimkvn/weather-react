@@ -122,39 +122,72 @@ var Weather = React.createClass({
 
   componentDidMount: function(){
 
-    var latitude;
-    var longitude;
+    // var latitude;
+    // var longitude;
 
     var component = this;
 
-    // if (navigator.geolocation){
-    //   navigator.geolocation.getCurrentPosition(function(position){
-    //     var latitude = position.coords.latitude;
-    //     var longitude = position.coords.longitude;
-    //     console.log(latitude, longitude)
-    //
-    //     component.getWeather();
-    //   })
-    // }
+    if (navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position){
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        console.log(latitude, longitude)
 
-    new Promise(
-      function(resolve, reject){
+        var key = '9015e70a6b3a67646b7b52980ff99846';
+        var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
 
-        if (navigator.geolocation){
-          navigator.geolocation.getCurrentPosition(function(position){
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-            console.log(latitude, longitude)
+        // var component = this;
+
+
+        fetchJsonp(weatherURL, {
+          timeout: 5000
+        })
+          .then(function(response){
+            return response.json()
           })
-        }
-      }
-    ).then(
-      this.getWeather()
-    ).catch(
-      function(err){
-        console.log('Rejected promise: '+err)
-      }
-    )
+          .then(function(json){
+            console.log(json)
+            component.setState({
+              currentTemp: Math.floor(json.currently.temperature),
+              currentIcon: json.currently.icon,
+              currentDescription: json.currently.summary,
+              currentWind: Math.floor(json.currently.windSpeed),
+              currentHumidity: Math.floor(json.currently.humidity),
+              currentPrecip: json.currently.precipProbability,
+              unitPref: 'Imperial',
+
+              forecast: json.daily.data,
+            });
+          })
+          .catch(function(err){
+            console.log('Fetch Error:', err);
+          })
+
+      })
+    }
+
+
+    // new Promise(
+    //   function(resolve, reject){
+    //
+    //
+    //       if (navigator.geolocation){
+    //       navigator.geolocation.getCurrentPosition(function(position){
+    //         var latitude = position.coords.latitude;
+    //         var longitude = position.coords.longitude;
+    //         console.log(latitude, longitude)
+    //       })
+    //     }
+    //
+    //   }
+    // ).then(
+    //   console.log('yay')
+    //
+    // ).catch(
+    //   function(err){
+    //     console.log('Rejected promise: '+err)
+    //   }
+    // )
 
 
 
@@ -162,8 +195,11 @@ var Weather = React.createClass({
 
   getWeather: function(){
 
-    var latitude = 33.748995;
-    var longitude = -84.387982;
+    // var latitude = 33.748995;
+    // var longitude = -84.387982;
+    var latitude,
+        longitude;
+
     var key = '9015e70a6b3a67646b7b52980ff99846';
     var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
 
