@@ -128,38 +128,85 @@ var Weather = React.createClass({
       navigator.geolocation.getCurrentPosition(function(position){
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-        console.log(latitude, longitude, position.coords.acuuracy)
+        console.log(latitude, longitude)
 
-        var key = '9015e70a6b3a67646b7b52980ff99846';
-        var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
 
-        fetchJsonp(weatherURL, {
-          timeout: 5000
-        })
+        var geoKEY = 'AIzaSyCdRjMXAQcUozlvQtv5pjn3d6jcW9WJCN4';
+        var geoURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=' + geoKEY;
+        fetch(geoURL)
           .then(function(response){
-            return response.json()
-          })
-          .then(function(json){
-            console.log(json)
-            component.setState({
-              currentTemp: Math.floor(json.currently.temperature),
-              currentIcon: json.currently.icon,
-              currentDescription: json.currently.summary,
-              currentWind: Math.floor(json.currently.windSpeed),
-              currentHumidity: Math.floor(json.currently.humidity),
-              currentPrecip: json.currently.precipProbability,
-              unitPref: 'Imperial',
-
-              forecast: json.daily.data,
-            });
+            response.json()
+              .then(function(data){
+                console.log(data)
+              })
           })
           .catch(function(err){
-            console.log('Fetch Error:', err);
+            console.log('Whoops, Fetch Error:'+err);
           })
+
+
+
+        // var key = '9015e70a6b3a67646b7b52980ff99846';
+        // var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
+        //
+        // fetchJsonp(weatherURL, {
+        //   timeout: 5000
+        // })
+        //   .then(function(response){
+        //     return response.json()
+        //   })
+        //   .then(function(json){
+        //     console.log(json)
+        //     component.setState({
+        //       currentTemp: Math.floor(json.currently.temperature),
+        //       currentIcon: json.currently.icon,
+        //       currentDescription: json.currently.summary,
+        //       currentWind: Math.floor(json.currently.windSpeed),
+        //       currentHumidity: Math.floor(json.currently.humidity),
+        //       currentPrecip: json.currently.precipProbability,
+        //       unitPref: 'Imperial',
+        //
+        //       forecast: json.daily.data,
+        //     });
+        //   })
+        //   .catch(function(err){
+        //     console.log('Fetch Error:', err);
+        //   })
 
       })
     }
   },
+
+  // getWeather: function(){
+  //   var latitude,
+  //       longitude;
+  //   var key = '9015e70a6b3a67646b7b52980ff99846';
+  //   var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
+  //
+  //   fetchJsonp(weatherURL, {
+  //     timeout: 5000
+  //   })
+  //     .then(function(response){
+  //       return response.json()
+  //     })
+  //     .then(function(json){
+  //       console.log(json)
+  //       component.setState({
+  //         currentTemp: Math.floor(json.currently.temperature),
+  //         currentIcon: json.currently.icon,
+  //         currentDescription: json.currently.summary,
+  //         currentWind: Math.floor(json.currently.windSpeed),
+  //         currentHumidity: Math.floor(json.currently.humidity),
+  //         currentPrecip: json.currently.precipProbability,
+  //         unitPref: 'Imperial',
+  //
+  //         forecast: json.daily.data,
+  //       });
+  //     })
+  //     .catch(function(err){
+  //       console.log('Fetch Error:', err);
+  //     })
+  // },
 
   handleSi: function(){
     if(this.state.unitPref == "Imperial"){
