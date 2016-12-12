@@ -128,7 +128,7 @@ var Weather = React.createClass({
       navigator.geolocation.getCurrentPosition(function(position){
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-        console.log(latitude, longitude)
+        console.log(latitude, longitude, position.coords.acuuracy)
 
         var key = '9015e70a6b3a67646b7b52980ff99846';
         var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
