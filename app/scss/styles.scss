@@ -1,52 +1,47 @@
-// @font-face{
-//   font-family: 'weather';
-//   src: url('../fonts/weather-icon-font/weathericons-regular-webfont.svg') format('svg'),
-//        url('../fonts/weather-icon-font/weathericons-regular-webfont.ttf') format('truetype'),
-//        url('../fonts/weather-icon-font/weathericons-regular-webfont.woff') format('woff'),
-//        url('../fonts/weather-icon-font/weathericons-regular-webfont.woff2') format('woff2');
-// }
-
 body{
   background: #393E41;
-  // border: 1px solid blue;
   color: white;
 }
 
 .current-temp-wrap{
+  margin-top: 2em;
   text-align: center;
-
-  .welcome-message{
-
-  }
 
   .temp-block{
     position: relative;
     margin: 0 auto;
     max-width: 20em;
 
-    h1{
-
-    }
-
     .unit-toggle{
       position: absolute;
       top: 0;
       right: 5em;
+
+      a{
+        color: #1098F7;
+        &:hover{
+          color: white;
+          cursor: pointer;
+          text-decoration: none;
+        }
+      }
     }
   }
 
   .description-wrap{
     text-transform: capitalize;
-    img{
-      width: 10em;
+    i{
+      font-size: 5em;
+      margin-top: 0.25ex;
+      margin-bottom: 0.5ex;
     }
   }
 }
 
 
 .forecast-wrap{
-  // border: 1px solid purple;
-  margin: 0;
+  margin: 3em 0 0 0;
+  text-align: center;
   .day-block-wrap{
     border: 1px solid white;
     margin: 1ex;
@@ -60,26 +55,30 @@ body{
     .day-name{
       // padding: 2ex;
       display: inline-block;
+
+      h3{
+        font-size: 1.5em;
+      }
     }
 
     .img-wrap{
       // padding: 2.5ex;
       display: inline-block;
-      img{
-        // width: 8em;
+
+      i{
+        font-size: 2em;
       }
     }
 
     .high-low{
       display: inline-block;
-      // padding: 2.5ex;
+      padding: 0;
       position: relative;
 
       h5{
         display: inline-block;
         font-size: 1.5em;
         margin-right: 0.5ex;
-        // padding-left: 1ex;
 
       }
       .low{
@@ -90,9 +89,38 @@ body{
 }
 
 @media(min-width: 768px){
-  .high-low{
-    h5{
-      padding-left: 1ex;
+  .forecast-wrap{
+    .day-block{
+      display: inline-block;
+      float: none;
+      padding: 1ex 0;
+      width: 12%;
+
+      .day-name{
+        h3{
+          margin-top: 10px;
+        }
+      }
+
+      .img-wrap{
+        margin-top: 1ex;
+        margin-bottom: 1.5ex;
+      }
+
+      .high-low{
+        padding: 0;
+        h3{
+          font-size: 1.5em;
+        }
+
+        h5{
+          font-size: 1em;
+          // margin-bottom: 1.5ex;
+          padding-left: 1ex;
+        }
+      }
     }
   }
+
+
 }

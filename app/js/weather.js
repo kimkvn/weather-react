@@ -53,8 +53,9 @@ var CurrentDetails = React.createClass({
       <div className="description-wrap">
         <i className={this.props.icon}></i>
         <p>{this.props.description}</p>
+        <p>Precipitation : {this.props.precip}%</p>
         <p>Humidity : {this.props.humidity}%</p>
-        <p>Wind: {this.props.unitPref == "Imperial" ? this.props.wind : Math.floor((this.props.wind * 1.609344)) } {this.props.unitPref == "Imperial" ? "mph" : "km/h"}
+        <p>Wind : {this.props.unitPref == "Imperial" ? this.props.wind : Math.floor((this.props.wind * 1.609344)) } {this.props.unitPref == "Imperial" ? "mph" : "km/h"}
         </p>
       </div>
     )
@@ -77,7 +78,7 @@ var Forecast = React.createClass({
         {
           this.props.item.map((day, index) => {
             return(
-              <div key={index} className="day-block col-xs-12">
+              <div key={index} className="day-block col-xs-12 col-sm-2">
                 <div className="day-block-wrap row">
                   <div className="day-name col-xs-4 col-sm-12">
                     <h3>{this.getWeekday(day.time)}</h3>
@@ -112,6 +113,7 @@ var Weather = React.createClass({
       currentIcon: '',
       currentDescription: '',
       currentHumidity: '',
+      currentPrecip: '',
       unitPref: '',
 
       forecast: [],
@@ -119,35 +121,44 @@ var Weather = React.createClass({
   },
 
   componentDidMount: function(){
-    var latitude = 33.748995;
-    var longitude = -84.387982;
-    var key = '9015e70a6b3a67646b7b52980ff99846';
-    var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
 
     var component = this;
 
-    fetchJsonp(weatherURL, {
-      timeout: 3000
-    })
-      .then(function(response){
-        return response.json()
-      })
-      .then(function(json){
-        console.log(json)
-        component.setState({
-          currentTemp: Math.floor(json.currently.temperature),
-          currentIcon: json.currently.icon,
-          currentDescription: json.currently.summary,
-          currentWind: Math.floor(json.currently.windSpeed),
-          currentHumidity: Math.floor(json.currently.humidity),
-          unitPref: 'Imperial',
+    if (navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position){
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        console.log(latitude, longitude, position.coords.acuuracy)
 
-          forecast: json.daily.data,
-        });
+        var key = '9015e70a6b3a67646b7b52980ff99846';
+        var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
+
+        fetchJsonp(weatherURL, {
+          timeout: 5000
+        })
+          .then(function(response){
+            return response.json()
+          })
+          .then(function(json){
+            console.log(json)
+            component.setState({
+              currentTemp: Math.floor(json.currently.temperature),
+              currentIcon: json.currently.icon,
+              currentDescription: json.currently.summary,
+              currentWind: Math.floor(json.currently.windSpeed),
+              currentHumidity: Math.floor(json.currently.humidity),
+              currentPrecip: json.currently.precipProbability,
+              unitPref: 'Imperial',
+
+              forecast: json.daily.data,
+            });
+          })
+          .catch(function(err){
+            console.log('Fetch Error:', err);
+          })
+
       })
-      .catch(function(err){
-        console.log('Fetch Error:', err);
-      })
+    }
   },
 
   handleSi: function(){
@@ -198,7 +209,7 @@ var Weather = React.createClass({
         return ("wi wi-day-cloudy")
         break;
       case "part-cloudy-night":
-        return ("wi-night-alt-cloudy")
+        return ("wi wi-night-alt-cloudy")
       default:
         return ("wi wi-cloud")
         break;
@@ -212,7 +223,10 @@ var Weather = React.createClass({
         <div className="current-temp-wrap">
           <WelcomeMessage />
           <div className="temp-block">
-            <CurrentWeather value={this.state.currentTemp} unitPref={this.state.unitPref}/>
+            <CurrentWeather
+              value={this.state.currentTemp}
+              unitPref={this.state.unitPref}
+            />
             <div className="unit-toggle">
               <a onClick={this.handleImp}> &#176;F</a>
               <span> | </span>
@@ -225,6 +239,7 @@ var Weather = React.createClass({
             humidity = {this.state.currentHumidity}
             wind = {this.state.currentWind}
             unitPref = {this.state.unitPref}
+            precip={Math.floor(this.state.currentPrecip * 100)}
           />
         </div>
 

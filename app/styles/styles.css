@@ -3,6 +3,7 @@ body {
   color: white; }
 
 .current-temp-wrap {
+  margin-top: 2em;
   text-align: center; }
   .current-temp-wrap .temp-block {
     position: relative;
@@ -12,13 +13,22 @@ body {
       position: absolute;
       top: 0;
       right: 5em; }
+      .current-temp-wrap .temp-block .unit-toggle a {
+        color: #1098F7; }
+        .current-temp-wrap .temp-block .unit-toggle a:hover {
+          color: white;
+          cursor: pointer;
+          text-decoration: none; }
   .current-temp-wrap .description-wrap {
     text-transform: capitalize; }
-    .current-temp-wrap .description-wrap img {
-      width: 10em; }
+    .current-temp-wrap .description-wrap i {
+      font-size: 5em;
+      margin-top: 0.25ex;
+      margin-bottom: 0.5ex; }
 
 .forecast-wrap {
-  margin: 0; }
+  margin: 3em 0 0 0;
+  text-align: center; }
   .forecast-wrap .day-block-wrap {
     border: 1px solid white;
     margin: 1ex; }
@@ -28,10 +38,15 @@ body {
       float: none; }
     .forecast-wrap .day-block .day-name {
       display: inline-block; }
+      .forecast-wrap .day-block .day-name h3 {
+        font-size: 1.5em; }
     .forecast-wrap .day-block .img-wrap {
       display: inline-block; }
+      .forecast-wrap .day-block .img-wrap i {
+        font-size: 2em; }
     .forecast-wrap .day-block .high-low {
       display: inline-block;
+      padding: 0;
       position: relative; }
       .forecast-wrap .day-block .high-low h5 {
         display: inline-block;
@@ -41,5 +56,20 @@ body {
         color: gray; }
 
 @media (min-width: 768px) {
-  .high-low h5 {
-    padding-left: 1ex; } }
+  .forecast-wrap .day-block {
+    display: inline-block;
+    float: none;
+    padding: 1ex 0;
+    width: 12%; }
+    .forecast-wrap .day-block .day-name h3 {
+      margin-top: 10px; }
+    .forecast-wrap .day-block .img-wrap {
+      margin-top: 1ex;
+      margin-bottom: 1.5ex; }
+    .forecast-wrap .day-block .high-low {
+      padding: 0; }
+      .forecast-wrap .day-block .high-low h3 {
+        font-size: 1.5em; }
+      .forecast-wrap .day-block .high-low h5 {
+        font-size: 1em;
+        padding-left: 1ex; } }
