@@ -3,15 +3,12 @@ var WelcomeMessage = React.createClass({
   getInitialState: function(){
     return({
       welcomeText: '',
-      formattedTime: '',
-      meridiem: '',
+
     })
   },
 
   componentDidMount: function(){
     this.setWelcomeText();
-    this.setCurrentTime();
-    this.setMeridiem();
   },
 
   // setting a greeting depending on time of day
@@ -32,6 +29,29 @@ var WelcomeMessage = React.createClass({
         welcomeText: 'Good Afternoon!',
       })
     }
+  },
+
+  render: function(){
+    return(
+      <div className="welcome-message">
+        <h1>{this.state.welcomeText}</h1>
+      </div>
+    )
+  }
+});
+
+var Location = React.createClass({
+  getInitialState: function(){
+    return({
+      formattedTime: '',
+      meridiem: '',
+    })
+  },
+
+  componentDidMount: function(){
+    this.setCurrentTime();
+    this.setMeridiem();
+    this.getWeekday();
   },
 
   setCurrentTime: function(){
@@ -62,12 +82,51 @@ var WelcomeMessage = React.createClass({
     }
   },
 
+  getWeekday: function(){
+    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    var dayIndex = (new Date()).getDay();
+    this.setState({
+      currentDay: days[dayIndex],
+    })
+  },
+
   render: function(){
     return(
-      <div className="welcome-message">
-        <h4>{this.state.welcomeText}</h4>
+      <div>
         <p>{this.props.location}</p>
+        <p>{this.state.currentDay}</p>
         <p>{this.state.formattedTime} {this.state.meridiem}</p>
+      </div>
+    )
+  }
+});
+
+var CurrentWeather = React.createClass({
+  render: function(){
+
+    if(!this.props.value){
+      return(
+        <div className="loading">
+          <WelcomeMessage />
+          <h4>Waiting for location...</h4>
+        </div>
+      )
+    }
+
+    return(
+      <div>
+
+        <Location location={this.props.location} getWeekday={this.props.getWeekday}/>
+
+        <div className="temp-block">
+          <h1>{this.props.unitPref == "Imperial" ? Math.floor(this.props.value) : Math.floor((this.props.value - 32) * (5/9)) }</h1>
+          <div className="unit-toggle">
+            <a onClick={this.props.handleImp}> &#176;F</a>
+            <span> | </span>
+            <a onClick={this.props.handleSi}> &#176;C</a>
+          </div>
+        </div>
+
       </div>
     )
   }
@@ -91,34 +150,6 @@ var CurrentDetails = React.createClass({
     )
   }
 });
-
-var CurrentWeather = React.createClass({
-  render: function(){
-
-    if(!this.props.value){
-      return(
-        <h3>Waiting for location...</h3>
-      )
-    }
-
-    return(
-      <div>
-        <WelcomeMessage location={this.props.location}/>
-
-        <div className="temp-block">
-          <h1>{this.props.unitPref == "Imperial" ? Math.floor(this.props.value) : Math.floor((this.props.value - 32) * (5/9)) }</h1>
-          <div className="unit-toggle">
-            <a onClick={this.props.handleImp}> &#176;F</a>
-            <span> | </span>
-            <a onClick={this.props.handleSi}> &#176;C</a>
-          </div>
-        </div>
-
-      </div>
-    )
-  }
-});
-
 
 var Forecast = React.createClass({
 
@@ -294,6 +325,14 @@ var Weather = React.createClass({
     }
   },
 
+  // returning a string day of the week from the 'time' data point obj in the Dark Sky API
+  getWeekday: function(val){
+    var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    // 'time' is returned as a UNIX value. Needs to be multiplied by 1000 to return a UTC value that the Date() method can read correctly
+    var index = (new Date(val * 1000)).getDay();
+    return days[index];
+  },
+
   render: function(){
     return(
       <div>
@@ -305,9 +344,11 @@ var Weather = React.createClass({
             handleImp={this.handleImp}
             handleSi={this.handleSi}
             location={this.state.location}
+            getWeekday={this.getWeekday}
           />
 
           <CurrentDetails
+            unitPref={this.state.unitPref}
             currentTemp={this.state.currentTemp}
             icon={this.getIcon(this.state.currentIcon)}
             description={this.state.currentDescription}
