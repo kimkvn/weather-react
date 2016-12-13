@@ -116,6 +116,8 @@ var Weather = React.createClass({
       currentPrecip: '',
       unitPref: '',
 
+      location: '',
+
       forecast: [],
     });
   },
@@ -126,10 +128,11 @@ var Weather = React.createClass({
 
     if (navigator.geolocation){
       navigator.geolocation.getCurrentPosition(function(position){
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
+        // var latitude = position.coords.latitude;
+        // var longitude = position.coords.longitude;
         console.log(latitude, longitude)
-
+        var latitude = 39.746133;
+        var longitude = -104.987387;
 
         var geoKEY = 'AIzaSyCdRjMXAQcUozlvQtv5pjn3d6jcW9WJCN4';
         var geoURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=' + geoKEY;
@@ -138,6 +141,9 @@ var Weather = React.createClass({
             response.json()
               .then(function(data){
                 console.log(data)
+                component.setState({
+                  location: data.results[5].formatted_address,
+                })
               })
           })
           .catch(function(err){
