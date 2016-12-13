@@ -2,11 +2,15 @@ var WelcomeMessage = React.createClass({
   getInitialState: function(){
     return({
       welcomeText: '',
+      formattedTime: '',
+      meridiem: '',
     })
   },
 
   componentDidMount: function(){
     this.setWelcomeText();
+    this.setCurrentTime();
+    this.setMeridiem();
   },
 
   // setting a greeting depending on time of day
@@ -29,11 +33,40 @@ var WelcomeMessage = React.createClass({
     }
   },
 
+  setCurrentTime: function(){
+    var hour = (new Date()).getHours();
+    if(hour > 12){
+      this.setState({
+        formattedTime: ((hour - 12) + ":00"),
+      });
+    }
+    else{
+      this.setState({
+        formattedTime: (hour + ":00"),
+      });
+    }
+  },
+
+  setMeridiem: function(){
+    var hour = (new Date()).getHours();
+    if(hour < 12){
+      this.setState({
+        meridiem: 'AM'
+      });
+    }
+    else{
+      this.setState({
+        meridiem: 'PM'
+      });
+    }
+  },
+
   render: function(){
     return(
       <div className="welcome-message">
         <h4>{this.state.welcomeText}</h4>
-        {this.props.location}
+        <p>{this.props.location}</p>
+        <p>{this.state.formattedTime} {this.state.meridiem}</p>
       </div>
     )
   }
@@ -156,67 +189,36 @@ var Weather = React.createClass({
 
 
 
-        // var key = '9015e70a6b3a67646b7b52980ff99846';
-        // var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
-        //
-        // fetchJsonp(weatherURL, {
-        //   timeout: 5000
-        // })
-        //   .then(function(response){
-        //     return response.json()
-        //   })
-        //   .then(function(json){
-        //     console.log(json)
-        //     component.setState({
-        //       currentTemp: Math.floor(json.currently.temperature),
-        //       currentIcon: json.currently.icon,
-        //       currentDescription: json.currently.summary,
-        //       currentWind: Math.floor(json.currently.windSpeed),
-        //       currentHumidity: Math.floor(json.currently.humidity),
-        //       currentPrecip: json.currently.precipProbability,
-        //       unitPref: 'Imperial',
-        //
-        //       forecast: json.daily.data,
-        //     });
-        //   })
-        //   .catch(function(err){
-        //     console.log('Fetch Error:', err);
-        //   })
+        var key = '9015e70a6b3a67646b7b52980ff99846';
+        var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
+
+        fetchJsonp(weatherURL, {
+          timeout: 5000
+        })
+          .then(function(response){
+            return response.json()
+          })
+          .then(function(json){
+            console.log(json)
+            component.setState({
+              currentTemp: Math.floor(json.currently.temperature),
+              currentIcon: json.currently.icon,
+              currentDescription: json.currently.summary,
+              currentWind: Math.floor(json.currently.windSpeed),
+              currentHumidity: Math.floor(json.currently.humidity),
+              currentPrecip: json.currently.precipProbability,
+              unitPref: 'Imperial',
+
+              forecast: json.daily.data,
+            });
+          })
+          .catch(function(err){
+            console.log('Fetch Error:', err);
+          })
 
       })
     }
   },
-
-  // getWeather: function(){
-  //   var latitude,
-  //       longitude;
-  //   var key = '9015e70a6b3a67646b7b52980ff99846';
-  //   var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
-  //
-  //   fetchJsonp(weatherURL, {
-  //     timeout: 5000
-  //   })
-  //     .then(function(response){
-  //       return response.json()
-  //     })
-  //     .then(function(json){
-  //       console.log(json)
-  //       component.setState({
-  //         currentTemp: Math.floor(json.currently.temperature),
-  //         currentIcon: json.currently.icon,
-  //         currentDescription: json.currently.summary,
-  //         currentWind: Math.floor(json.currently.windSpeed),
-  //         currentHumidity: Math.floor(json.currently.humidity),
-  //         currentPrecip: json.currently.precipProbability,
-  //         unitPref: 'Imperial',
-  //
-  //         forecast: json.daily.data,
-  //       });
-  //     })
-  //     .catch(function(err){
-  //       console.log('Fetch Error:', err);
-  //     })
-  // },
 
   handleSi: function(){
     if(this.state.unitPref == "Imperial"){
