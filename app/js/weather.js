@@ -33,7 +33,7 @@ var WelcomeMessage = React.createClass({
     return(
       <div className="welcome-message">
         <h4>{this.state.welcomeText}</h4>
-        The current temperature is:
+        {this.props.location}
       </div>
     )
   }
@@ -128,11 +128,15 @@ var Weather = React.createClass({
 
     if (navigator.geolocation){
       navigator.geolocation.getCurrentPosition(function(position){
-        // var latitude = position.coords.latitude;
-        // var longitude = position.coords.longitude;
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
         console.log(latitude, longitude)
-        var latitude = 39.746133;
-        var longitude = -104.987387;
+
+        //Denver CO
+        // var latitude = 39.746133;
+        // var longitude = -104.987387;
+
+
 
         var geoKEY = 'AIzaSyCdRjMXAQcUozlvQtv5pjn3d6jcW9WJCN4';
         var geoURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=' + geoKEY;
@@ -274,7 +278,7 @@ var Weather = React.createClass({
       <div>
 
         <div className="current-temp-wrap">
-          <WelcomeMessage />
+          <WelcomeMessage location={this.state.location}/>
           <div className="temp-block">
             <CurrentWeather
               value={this.state.currentTemp}
