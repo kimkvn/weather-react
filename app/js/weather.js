@@ -76,14 +76,21 @@ var WelcomeMessage = React.createClass({
 var CurrentWeather = React.createClass({
   render: function(){
 
-    if(this.props.value == 0){
+    if(!this.props.value){
       return(
         <h1>Waiting...</h1>
       )
     }
 
     return(
-      <h1>{this.props.unitPref == "Imperial" ? Math.floor(this.props.value) : Math.floor((this.props.value - 32) * (5/9)) }</h1>
+      <div>
+        <h1>{this.props.unitPref == "Imperial" ? Math.floor(this.props.value) : Math.floor((this.props.value - 32) * (5/9)) }</h1>
+        <div className="unit-toggle">
+          <a onClick={this.props.handleImp}> &#176;F</a>
+          <span> | </span>
+          <a onClick={this.props.handleSi}> &#176;C</a>
+        </div>
+      </div>
     )
   }
 });
@@ -282,19 +289,21 @@ var Weather = React.createClass({
       <div>
 
         <div className="current-temp-wrap">
+
+
           <WelcomeMessage location={this.state.location}/>
+
           <div className="temp-block">
             <CurrentWeather
               value={this.state.currentTemp}
               unitPref={this.state.unitPref}
+              handleImp={this.handleImp}
+              handleSi={this.handleSi}
             />
 
-            <div className="unit-toggle">
-              <a onClick={this.handleImp}> &#176;F</a>
-              <span> | </span>
-              <a onClick={this.handleSi}> &#176;C</a>
-            </div>
+
           </div>
+
           <CurrentDetails
             icon = {this.getIcon(this.state.currentIcon)}
             description = {this.state.currentDescription}
@@ -303,6 +312,7 @@ var Weather = React.createClass({
             unitPref = {this.state.unitPref}
             precip={Math.floor(this.state.currentPrecip * 100)}
           />
+
         </div>
 
         <Forecast
