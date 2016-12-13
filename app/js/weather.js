@@ -73,42 +73,52 @@ var WelcomeMessage = React.createClass({
   }
 });
 
-var CurrentWeather = React.createClass({
-  render: function(){
-
-    if(!this.props.value){
-      return(
-        <h1>Waiting...</h1>
-      )
-    }
-
-    return(
-      <div>
-        <h1>{this.props.unitPref == "Imperial" ? Math.floor(this.props.value) : Math.floor((this.props.value - 32) * (5/9)) }</h1>
-        <div className="unit-toggle">
-          <a onClick={this.props.handleImp}> &#176;F</a>
-          <span> | </span>
-          <a onClick={this.props.handleSi}> &#176;C</a>
-        </div>
-      </div>
-    )
-  }
-});
-
 var CurrentDetails = React.createClass({
   render: function(){
+    if(!this.props.currentTemp){
+      return(
+        <div></div>
+      )
+    }
     return(
       <div className="description-wrap">
         <i className={this.props.icon}></i>
         <p>{this.props.description}</p>
         <p>Precipitation : {this.props.precip}%</p>
         <p>Humidity : {this.props.humidity}%</p>
-        <p>Wind : {this.props.unitPref == "Imperial" ? this.props.wind : Math.floor((this.props.wind * 1.609344)) } {this.props.unitPref == "Imperial" ? "mph" : "km/h"}
-        </p>
+        <p>Wind : {this.props.unitPref == "Imperial" ? this.props.wind : Math.floor((this.props.wind * 1.609344)) } {this.props.unitPref == "Imperial" ? "mph" : "km/h"}</p>
       </div>
     )
   }
 });
+
+var CurrentWeather = React.createClass({
+  render: function(){
+
+    if(!this.props.value){
+      return(
+        <h3>Waiting for location...</h3>
+      )
+    }
+
+    return(
+      <div>
+        <WelcomeMessage location={this.props.location}/>
+
+        <div className="temp-block">
+          <h1>{this.props.unitPref == "Imperial" ? Math.floor(this.props.value) : Math.floor((this.props.value - 32) * (5/9)) }</h1>
+          <div className="unit-toggle">
+            <a onClick={this.props.handleImp}> &#176;F</a>
+            <span> | </span>
+            <a onClick={this.props.handleSi}> &#176;C</a>
+          </div>
+        </div>
+
+      </div>
+    )
+  }
+});
+
 
 var Forecast = React.createClass({
 
@@ -287,29 +297,22 @@ var Weather = React.createClass({
   render: function(){
     return(
       <div>
-
         <div className="current-temp-wrap">
 
-
-          <WelcomeMessage location={this.state.location}/>
-
-          <div className="temp-block">
-            <CurrentWeather
-              value={this.state.currentTemp}
-              unitPref={this.state.unitPref}
-              handleImp={this.handleImp}
-              handleSi={this.handleSi}
-            />
-
-
-          </div>
+          <CurrentWeather
+            value={this.state.currentTemp}
+            unitPref={this.state.unitPref}
+            handleImp={this.handleImp}
+            handleSi={this.handleSi}
+            location={this.state.location}
+          />
 
           <CurrentDetails
-            icon = {this.getIcon(this.state.currentIcon)}
-            description = {this.state.currentDescription}
-            humidity = {this.state.currentHumidity}
-            wind = {this.state.currentWind}
-            unitPref = {this.state.unitPref}
+            currentTemp={this.state.currentTemp}
+            icon={this.getIcon(this.state.currentIcon)}
+            description={this.state.currentDescription}
+            humidity={this.state.currentHumidity}
+            wind={this.state.currentWind}
             precip={Math.floor(this.state.currentPrecip * 100)}
           />
 
