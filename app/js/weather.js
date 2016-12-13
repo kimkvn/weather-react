@@ -1,3 +1,4 @@
+
 var WelcomeMessage = React.createClass({
   getInitialState: function(){
     return({
@@ -74,6 +75,13 @@ var WelcomeMessage = React.createClass({
 
 var CurrentWeather = React.createClass({
   render: function(){
+
+    if(this.props.value == 0){
+      return(
+        <h1>Waiting...</h1>
+      )
+    }
+
     return(
       <h1>{this.props.unitPref == "Imperial" ? Math.floor(this.props.value) : Math.floor((this.props.value - 32) * (5/9)) }</h1>
     )
@@ -280,6 +288,7 @@ var Weather = React.createClass({
               value={this.state.currentTemp}
               unitPref={this.state.unitPref}
             />
+
             <div className="unit-toggle">
               <a onClick={this.handleImp}> &#176;F</a>
               <span> | </span>
@@ -305,5 +314,9 @@ var Weather = React.createClass({
     )
   }
 });
+
+
+
+
 
 ReactDOM.render(<Weather />, document.getElementById('weather'));
