@@ -165,12 +165,6 @@ var Weather = React.createClass({
         var longitude = position.coords.longitude;
         console.log(latitude, longitude)
 
-        //Denver CO
-        // var latitude = 39.746133;
-        // var longitude = -104.987387;
-
-
-
         var geoKEY = 'AIzaSyCdRjMXAQcUozlvQtv5pjn3d6jcW9WJCN4';
         var geoURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=' + geoKEY;
         fetch(geoURL)
