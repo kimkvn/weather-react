@@ -6,6 +6,11 @@ body{
 
 .loading{
   padding-top: 15em;
+  position: relative;
+
+  .spinner{
+    top: 115% !important;
+  }
 }
 
 .current-temp-wrap{
@@ -60,6 +65,7 @@ body{
         font-size: 5em;
         left: 0;
       }
+
       p{
         font-size: 1.5em;
         margin-top: 1ex;
@@ -69,6 +75,7 @@ body{
     .weather-stat-wrap{
       position: relative;
       margin-top: 2ex;
+
       .weather-stat{
         height: 3.5ex;
         margin: 0 auto;
@@ -98,18 +105,20 @@ body{
 .forecast-wrap{
   margin: 1em 0 0 0;
   text-align: center;
+
   .day-block-wrap{
     border: 1px solid white;
     margin: 1ex;
   }
+
   .day-block{
-    // border: 1px solid black;
     text-align: center;
+
     div{
       float: none;
     }
+
     .day-name{
-      // padding: 2ex;
       display: inline-block;
 
       h3{
@@ -118,7 +127,6 @@ body{
     }
 
     .img-wrap{
-      // padding: 2.5ex;
       display: inline-block;
 
       i{
@@ -165,18 +173,25 @@ body{
 
       .high-low{
         padding: 0;
+
         h3{
           font-size: 1.5em;
         }
 
         h5{
           font-size: 1em;
-          // margin-bottom: 1.5ex;
           padding-left: 1ex;
         }
       }
     }
   }
 
+}
 
+
+/*  Firefox  */
+@-moz-document url-prefix(){
+  .loading{
+
+  }
 }
