@@ -173,9 +173,20 @@ var CurrentDetails = React.createClass({
       <div className="description-wrap">
         <i className={this.props.icon}></i>
         <p>{this.props.description}</p>
-        <p>Precipitation : {this.props.precip}%</p>
-        <p>Humidity : {this.props.humidity}%</p>
-        <p>Wind : {this.props.unitPref == "Imperial" ? this.props.wind : Math.floor((this.props.wind * 1.609344)) } {this.props.unitPref == "Imperial" ? "mph" : "km/h"}</p>
+        <div className="weather-stat-wrap">
+          <div className="weather-stat">
+            <p className="stat-title">Precipitation: </p>
+            <p className="stat-value">{this.props.precip}%</p>
+          </div>
+          <div className="weather-stat">
+            <p className="stat-title">Humidity: </p>
+            <p className="stat-value">{this.props.humidity}%</p>
+          </div>
+          <div className="weather-stat">
+            <p className="stat-title">Wind: </p>
+            <p className="stat-value">{this.props.unitPref == "Imperial" ? this.props.wind : Math.floor((this.props.wind * 1.609344)) } {this.props.unitPref == "Imperial" ? "mph" : "km/h"}</p>
+          </div>
+        </div>
       </div>
     )
   }

@@ -51,13 +51,40 @@ body{
   }
 
   .description-wrap{
-    text-transform: capitalize;
     i{
       font-size: 5em;
       margin-top: 0.25ex;
       margin-bottom: 0.5ex;
     }
+    p{
+
+    }
+    .weather-stat-wrap{
+      position: relative;
+
+      .weather-stat{
+        height: 3.5ex;
+        margin: 0 auto;
+        max-width: 15em;
+        position: relative;
+        text-transform: unset;
+
+        p{
+          position: absolute;
+        }
+
+        .stat-title{
+          left: 0;
+        }
+
+        .stat-value{
+          right: 0;
+        }
+      }
+    }
+
   }
+
 }
 
 

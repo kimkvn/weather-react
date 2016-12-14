@@ -31,12 +31,24 @@ body {
           text-decoration: none; }
       .current-temp-wrap .temp-block .unit-toggle span {
         font-size: 1em; }
-  .current-temp-wrap .description-wrap {
-    text-transform: capitalize; }
-    .current-temp-wrap .description-wrap i {
-      font-size: 5em;
-      margin-top: 0.25ex;
-      margin-bottom: 0.5ex; }
+  .current-temp-wrap .description-wrap i {
+    font-size: 5em;
+    margin-top: 0.25ex;
+    margin-bottom: 0.5ex; }
+  .current-temp-wrap .description-wrap .weather-stat-wrap {
+    position: relative; }
+    .current-temp-wrap .description-wrap .weather-stat-wrap .weather-stat {
+      height: 3.5ex;
+      margin: 0 auto;
+      max-width: 15em;
+      position: relative;
+      text-transform: unset; }
+      .current-temp-wrap .description-wrap .weather-stat-wrap .weather-stat p {
+        position: absolute; }
+      .current-temp-wrap .description-wrap .weather-stat-wrap .weather-stat .stat-title {
+        left: 0; }
+      .current-temp-wrap .description-wrap .weather-stat-wrap .weather-stat .stat-value {
+        right: 0; }
 
 .forecast-wrap {
   margin: 3em 0 0 0;
