@@ -109,9 +109,9 @@ var CurrentWeather = React.createClass({
     , length: 4 // The length of each line
     , width: 5 // The line thickness
     , radius: 30 // The radius of the inner circle
-    , scale: 1 // Scales overall size of the spinner
+    , scale: 0.5 // Scales overall size of the spinner
     , corners: 1 // Corner roundness (0..1)
-    , color: '#000' // #rgb or #rrggbb or array of colors
+    , color: '#fff' // #rgb or #rrggbb or array of colors
     , opacity: 0.3 // Opacity of the lines
     , rotate: 0 // The rotation offset
     , direction: 1 // 1: clockwise, -1: counterclockwise
@@ -137,7 +137,7 @@ var CurrentWeather = React.createClass({
       return(
         <div className="loading">
           <WelcomeMessage />
-          <h4>Waiting for location...</h4>
+          <h4>Getting the local weather...</h4>
           <div id="spin"></div>
         </div>
       )
@@ -240,66 +240,66 @@ var Weather = React.createClass({
       forecast: [],
     });
   },
-
-  componentDidMount: function(){
-
-    var component = this;
-
-    if (navigator.geolocation){
-      navigator.geolocation.getCurrentPosition(function(position){
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        console.log(latitude, longitude)
-
-        var geoKEY = 'AIzaSyCdRjMXAQcUozlvQtv5pjn3d6jcW9WJCN4';
-        var geoURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=' + geoKEY;
-        fetch(geoURL)
-          .then(function(response){
-            response.json()
-              .then(function(data){
-                console.log(data)
-                component.setState({
-                  location: data.results[5].formatted_address,
-                })
-              })
-          })
-          .catch(function(err){
-            console.log('Whoops, Fetch Error:'+err);
-          })
-
-
-
-        var key = '9015e70a6b3a67646b7b52980ff99846';
-        var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
-
-        fetchJsonp(weatherURL, {
-          timeout: 5000
-        })
-          .then(function(response){
-            return response.json()
-          })
-          .then(function(json){
-            console.log(json)
-            component.setState({
-              currentTemp: Math.floor(json.currently.temperature),
-              currentIcon: json.currently.icon,
-              currentDescription: json.currently.summary,
-              currentWind: Math.floor(json.currently.windSpeed),
-              currentHumidity: Math.floor(json.currently.humidity),
-              currentPrecip: json.currently.precipProbability,
-              unitPref: 'Imperial',
-
-              forecast: json.daily.data,
-            });
-          })
-          .catch(function(err){
-            console.log('Fetch Error:', err);
-          })
-
-      })
-    }
-  },
-
+  //
+  // componentDidMount: function(){
+  //
+  //   var component = this;
+  //
+  //   if (navigator.geolocation){
+  //     navigator.geolocation.getCurrentPosition(function(position){
+  //       var latitude = position.coords.latitude;
+  //       var longitude = position.coords.longitude;
+  //       console.log(latitude, longitude)
+  //
+  //       var geoKEY = 'AIzaSyCdRjMXAQcUozlvQtv5pjn3d6jcW9WJCN4';
+  //       var geoURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=' + geoKEY;
+  //       fetch(geoURL)
+  //         .then(function(response){
+  //           response.json()
+  //             .then(function(data){
+  //               console.log(data)
+  //               component.setState({
+  //                 location: data.results[5].formatted_address,
+  //               })
+  //             })
+  //         })
+  //         .catch(function(err){
+  //           console.log('Whoops, Fetch Error:'+err);
+  //         })
+  //
+  //
+  //
+  //       var key = '9015e70a6b3a67646b7b52980ff99846';
+  //       var weatherURL = 'https://api.darksky.net/forecast/'+ key + '/'+latitude+','+longitude+'/?exclude=hourly,minutely,flags'
+  //
+  //       fetchJsonp(weatherURL, {
+  //         timeout: 5000
+  //       })
+  //         .then(function(response){
+  //           return response.json()
+  //         })
+  //         .then(function(json){
+  //           console.log(json)
+  //           component.setState({
+  //             currentTemp: Math.floor(json.currently.temperature),
+  //             currentIcon: json.currently.icon,
+  //             currentDescription: json.currently.summary,
+  //             currentWind: Math.floor(json.currently.windSpeed),
+  //             currentHumidity: Math.floor(json.currently.humidity),
+  //             currentPrecip: json.currently.precipProbability,
+  //             unitPref: 'Imperial',
+  //
+  //             forecast: json.daily.data,
+  //           });
+  //         })
+  //         .catch(function(err){
+  //           console.log('Fetch Error:', err);
+  //         })
+  //
+  //     })
+  //   }
+  // },
+  //
   handleSi: function(){
     if(this.state.unitPref == "Imperial"){
       this.setState({

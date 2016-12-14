@@ -2,6 +2,9 @@ body {
   background: #393E41;
   color: white; }
 
+.loading {
+  padding-top: 15em; }
+
 .current-temp-wrap {
   margin-top: 2em;
   text-align: center; }
