@@ -171,8 +171,11 @@ var CurrentDetails = React.createClass({
     }
     return(
       <div className="description-wrap">
-        <i className={this.props.icon}></i>
-        <p>{this.props.description}</p>
+        <div className="icon-wrap">
+          <i className={this.props.icon}></i>
+          <p>{this.props.description}</p>
+        </div>
+
         <div className="weather-stat-wrap">
           <div className="weather-stat">
             <p className="stat-title">Precipitation: </p>

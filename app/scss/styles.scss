@@ -51,17 +51,24 @@ body{
   }
 
   .description-wrap{
-    i{
-      font-size: 5em;
-      margin-top: 0.25ex;
-      margin-bottom: 0.5ex;
-    }
-    p{
+    .icon-wrap{
+      position: relative;
+      margin: 0 auto;
+      max-width: 15em;
 
+      i{
+        font-size: 5em;
+        left: 0;
+      }
+      p{
+        font-size: 1.5em;
+        margin-top: 1ex;
+      }
     }
+
     .weather-stat-wrap{
       position: relative;
-
+      margin-top: 2ex;
       .weather-stat{
         height: 3.5ex;
         margin: 0 auto;
@@ -89,7 +96,7 @@ body{
 
 
 .forecast-wrap{
-  margin: 3em 0 0 0;
+  margin: 1em 0 0 0;
   text-align: center;
   .day-block-wrap{
     border: 1px solid white;
