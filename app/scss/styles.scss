@@ -1,6 +1,7 @@
 body{
   background: #393E41;
   color: white;
+  font-size: 16px;
 }
 
 .loading{
@@ -8,11 +9,10 @@ body{
 }
 
 .current-temp-wrap{
-  margin-top: 2em;
+  margin-top: 1em;
   text-align: center;
 
   .location{
-
     .date{
       display: inline-block;
       margin: 0 0.5ex;
