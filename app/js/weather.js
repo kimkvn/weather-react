@@ -259,8 +259,11 @@ var DefaultLocation = React.createClass({
     if(!this.props.locationPermission && this.props.value){
       return(
         <div className="location-denied">
-          <p>You have selected to not share your location, and that&#39;s okay!</p>
-          <p>Here&#39;s a default location.</p>
+          <p>
+          You have chosen to not share your location, and that&#39;s okay!
+          <br></br>
+          You&#39;re viewing the current the weather for a default location.
+          </p>
         </div>
       )
     }
@@ -268,6 +271,18 @@ var DefaultLocation = React.createClass({
       <div></div>
     )
 
+  }
+});
+
+var Credits = React.createClass({
+  render: function(){
+    return(
+      <div className="credits">
+        <p className="made-by">
+          Made with lots of coffee and tea by <a href="https://kimkvn.github.io" target="_blank">Kevin Kim</a>
+        </p>
+      </div>
+    )
   }
 });
 
@@ -431,6 +446,10 @@ var Weather = React.createClass({
   render: function(){
     return(
       <div>
+        <DefaultLocation
+          value={this.state.currentTemp}
+          locationPermission={this.state.locationPermission}
+        />
         <div className="current-temp-wrap">
 
           <CurrentWeather
@@ -462,10 +481,7 @@ var Weather = React.createClass({
           locationPermission={this.state.locationPermission}
         />
 
-        <DefaultLocation
-          value={this.state.currentTemp}
-          locationPermission={this.state.locationPermission}
-        />
+        <Credits />
 
       </div>
     )

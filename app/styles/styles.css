@@ -90,6 +90,21 @@ body {
       .forecast-wrap .day-block .high-low .low {
         color: gray; }
 
+.location-denied {
+  text-align: center;
+  background: black; }
+  .location-denied p {
+    font-size: 12px;
+    margin: 0 auto;
+    padding: 1em;
+    width: 100%; }
+
+.credits {
+  bottom: 0;
+  text-align: center; }
+  .credits a {
+    color: #1098F7; }
+
 @media (min-width: 768px) {
   .forecast-wrap .day-block {
     display: inline-block;
@@ -107,7 +122,12 @@ body {
         font-size: 1.5em; }
       .forecast-wrap .day-block .high-low h5 {
         font-size: 1em;
-        padding-left: 1ex; } }
+        padding-left: 1ex; }
+  .credits {
+    bottom: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); } }
 
 /*  Firefox  */
 @-moz-document url-prefix() {}

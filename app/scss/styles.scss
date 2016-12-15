@@ -152,6 +152,27 @@ body{
   }
 }
 
+.location-denied{
+  text-align: center;
+  background: black;
+  p{
+    font-size: 12px;
+    // max-width: 5em;
+    margin: 0 auto;
+    padding: 1em;
+    width: 100%;
+
+  }
+}
+
+.credits{
+  bottom: 0;
+  text-align: center;
+  a{
+    color: #1098F7;
+  }
+}
+
 @media(min-width: 768px){
   .forecast-wrap{
     .day-block{
@@ -184,6 +205,19 @@ body{
         }
       }
     }
+  }
+  .location-denied{
+    // position: absolute;
+    // left: 0;
+    // max-width: 10em;
+    // text-align: left;
+  }
+  .credits{
+    bottom: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    // right: 1.5em;
   }
 
 }
