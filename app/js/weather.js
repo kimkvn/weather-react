@@ -232,8 +232,29 @@ var Forecast = React.createClass({
             );
           })
         }
+        <DefaultLocation locationPermission={this.props.locationPermission}/>
       </div>
     )
+  }
+});
+
+var DefaultLocation = React.createClass({
+
+  render: function(){
+
+    if(!this.props.locationPermission){
+      return(
+        <div className="location-denied">
+          <p>You have selected to not share your location, and that&#39;s okay!</p>
+          <p>Here&#39;s a default location.</p>
+        </div>
+      )
+    }
+
+    return(
+      <div></div>
+    )
+
   }
 });
 
@@ -266,14 +287,15 @@ var Weather = React.createClass({
       component.setState({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
+        locationPermission: true,
       });
       component.getLocation();
       component.getWeather();
     }
 
-    //location: denied:
+    //location: denied
     function error(){
-
+      //setting placeholder coordinates so user can still see what the page looks like with data
       component.setState({
         latitude: 33.7490,
         longitude: -84.3880,
@@ -283,8 +305,6 @@ var Weather = React.createClass({
       component.getLocation();
       component.getWeather();
     }
-
-    navigator.geolocation.getCurrentPosition(success, error);
 
   },
 
@@ -433,7 +453,11 @@ var Weather = React.createClass({
           item={this.state.forecast}
           unitPref={this.state.unitPref}
           getIcon={this.getIcon}
+          locationPermission={this.state.locationPermission}
         />
+
+
+
       </div>
     )
   }
