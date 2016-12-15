@@ -169,7 +169,7 @@ var CurrentWeather = React.createClass({
 
   render: function(){
 
-    if(!this.props.value){
+    if(this.props.loading){
       return(
         <div className="loading">
           <p className="browser-check">This site will work only in <a href="https://www.google.com/chrome/browser">Chrome</a> or <a href="https://www.mozilla.org/firefox/products/">Firefox</a>. </p>
@@ -202,7 +202,7 @@ var CurrentWeather = React.createClass({
 
 var CurrentDetails = React.createClass({
   render: function(){
-    if(!this.props.currentTemp){
+    if(this.props.loading){
       return(
         <div></div>
       )
@@ -277,7 +277,7 @@ var Forecast = React.createClass({
 
 var Credits = React.createClass({
   render: function(){
-    if(!this.props.value){
+    if(this.props.loading){
       return(
         <div className="credits load-fix">
           <p className="made-by">
@@ -310,7 +310,7 @@ var Weather = React.createClass({
       currentHumidity: '',
       currentPrecip: '',
       unitPref: '',
-
+      loading: true,
       location: '',
 
       forecast: [],
@@ -392,7 +392,7 @@ var Weather = React.createClass({
           currentHumidity: Math.floor(json.currently.humidity),
           currentPrecip: json.currently.precipProbability,
           unitPref: 'Imperial',
-
+          loading: false,
           forecast: json.daily.data,
         });
       })
@@ -473,6 +473,7 @@ var Weather = React.createClass({
             location={this.state.location}
             getWeekday={this.getWeekday}
             locationPermission={this.state.locationPermission}
+            loading={this.state.loading}
           />
 
           <CurrentDetails
@@ -483,6 +484,7 @@ var Weather = React.createClass({
             humidity={this.state.currentHumidity}
             wind={this.state.currentWind}
             precip={Math.floor(this.state.currentPrecip * 100)}
+            loading={this.state.loading}
           />
 
         </div>
@@ -494,7 +496,7 @@ var Weather = React.createClass({
           locationPermission={this.state.locationPermission}
         />
 
-        <Credits value={this.state.currentTemp}/>
+        <Credits loading={this.state.loading}/>
 
       </div>
     )
