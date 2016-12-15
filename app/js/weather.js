@@ -9,7 +9,7 @@ var DefaultLocation = React.createClass({
           <p>
           You have chosen to not share your location, and that&#39;s okay!
           <br></br>
-          You&#39;re viewing the current the weather for a default location.
+          You are viewing the current weather for a default location.
           </p>
         </div>
       )
