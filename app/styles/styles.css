@@ -113,12 +113,13 @@ a {
     width: 100%; }
 
 .credits {
-  bottom: 0;
-  position: absolute;
   text-align: center;
   width: 100%; }
   .credits a {
     color: #1098F7; }
+  .credits.load-fix {
+    bottom: 0;
+    position: absolute; }
 
 @media (min-width: 768px) {
   .forecast-wrap .day-block {

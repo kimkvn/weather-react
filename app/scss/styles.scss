@@ -185,12 +185,14 @@ a{
 }
 
 .credits{
-  bottom: 0;
-  position: absolute;
   text-align: center;
   width: 100%;
   a{
     color: #1098F7;
+  }
+  &.load-fix{
+    bottom: 0;
+    position: absolute;
   }
 }
 
