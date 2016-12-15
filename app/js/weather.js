@@ -232,7 +232,6 @@ var Forecast = React.createClass({
             );
           })
         }
-        <DefaultLocation locationPermission={this.props.locationPermission}/>
       </div>
     )
   }
@@ -242,7 +241,7 @@ var DefaultLocation = React.createClass({
 
   render: function(){
 
-    if(!this.props.locationPermission){
+    if(!this.props.locationPermission && this.props.value){
       return(
         <div className="location-denied">
           <p>You have selected to not share your location, and that&#39;s okay!</p>
@@ -250,7 +249,6 @@ var DefaultLocation = React.createClass({
         </div>
       )
     }
-
     return(
       <div></div>
     )
@@ -456,7 +454,9 @@ var Weather = React.createClass({
           locationPermission={this.state.locationPermission}
         />
 
-
+        <DefaultLocation
+          value={this.state.currentTemp}
+          locationPermission={this.state.locationPermission}/>
 
       </div>
     )
