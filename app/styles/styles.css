@@ -3,11 +3,22 @@ body {
   color: white;
   font-size: 16px; }
 
+a {
+  color: #1098F7; }
+  a:hover {
+    color: white; }
+
 .loading {
-  padding-top: 15em;
+  padding-top: 12em;
   position: relative; }
   .loading .spinner {
     top: 115% !important; }
+  .loading .browser-check {
+    font-size: 14px;
+    position: absolute;
+    bottom: -18em;
+    left: 50%;
+    transform: translateX(-50%); }
 
 .current-temp-wrap {
   margin-top: 1em;
@@ -101,6 +112,9 @@ body {
 
 .credits {
   bottom: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center; }
   .credits a {
     color: #1098F7; }

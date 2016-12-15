@@ -4,12 +4,26 @@ body{
   font-size: 16px;
 }
 
+a{
+  color: #1098F7;
+  &:hover{
+    color: white;
+  }
+}
 .loading{
-  padding-top: 15em;
+  padding-top: 12em;
   position: relative;
 
   .spinner{
     top: 115% !important;
+  }
+
+  .browser-check{
+    font-size: 14px;
+    position: absolute;
+    bottom: -18em;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -167,6 +181,9 @@ body{
 
 .credits{
   bottom: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
   a{
     color: #1098F7;
@@ -206,18 +223,11 @@ body{
       }
     }
   }
-  .location-denied{
-    // position: absolute;
-    // left: 0;
-    // max-width: 10em;
-    // text-align: left;
-  }
   .credits{
     bottom: 0;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    // right: 1.5em;
   }
 
 }
