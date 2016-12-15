@@ -172,10 +172,11 @@ var CurrentWeather = React.createClass({
     if(!this.props.value){
       return(
         <div className="loading">
+          <p className="browser-check">This site will work only in <a href="https://www.google.com/chrome/browser">Chrome</a> or <a href="https://www.mozilla.org/firefox/products/">Firefox</a>. </p>
           <WelcomeMessage />
           <h4>Getting the local weather...</h4>
           <div id="spin"></div>
-          <p className="browser-check">This site will work only in <a href="https://www.google.com/chrome/browser">Chrome</a> or <a href="https://www.mozilla.org/firefox/products/">Firefox</a>. </p>
+
         </div>
       )
     }
@@ -308,39 +309,39 @@ var Weather = React.createClass({
       forecast: [],
     });
   },
-  //
-  // componentDidMount: function(){
-  //
-  //   var component = this;
-  //
-  //   navigator.geolocation.getCurrentPosition(success, error);
-  //
-  //   // location: granted
-  //   function success(position){
-  //     component.setState({
-  //       latitude: position.coords.latitude,
-  //       longitude: position.coords.longitude,
-  //       locationPermission: true,
-  //     });
-  //     component.getLocation();
-  //     component.getWeather();
-  //   }
-  //
-  //   //location: denied
-  //   function error(){
-  //     //setting placeholder coordinates so user can still see what the page looks like with data
-  //     component.setState({
-  //       latitude: 33.7490,
-  //       longitude: -84.3880,
-  //       locationPermission: false,
-  //     });
-  //
-  //     component.getLocation();
-  //     component.getWeather();
-  //   }
-  //
-  // },
-  //
+  
+  componentDidMount: function(){
+
+    var component = this;
+
+    navigator.geolocation.getCurrentPosition(success, error);
+
+    // location: granted
+    function success(position){
+      component.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        locationPermission: true,
+      });
+      component.getLocation();
+      component.getWeather();
+    }
+
+    //location: denied
+    function error(){
+      //setting placeholder coordinates so user can still see what the page looks like with data
+      component.setState({
+        latitude: 33.7490,
+        longitude: -84.3880,
+        locationPermission: false,
+      });
+
+      component.getLocation();
+      component.getWeather();
+    }
+
+  },
+
   getLocation: function(){
     var geoKEY = 'AIzaSyCdRjMXAQcUozlvQtv5pjn3d6jcW9WJCN4';
     var geoURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + this.state.latitude + ',' + this.state.longitude + '&key=' + geoKEY;
@@ -486,7 +487,7 @@ var Weather = React.createClass({
           locationPermission={this.state.locationPermission}
         />
 
-        <Credits value={this.state.currentTemp}/>
+
 
       </div>
     )
