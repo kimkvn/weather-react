@@ -464,7 +464,8 @@ var Weather = React.createClass({
 
         <DefaultLocation
           value={this.state.currentTemp}
-          locationPermission={this.state.locationPermission}/>
+          locationPermission={this.state.locationPermission}
+        />
 
       </div>
     )
