@@ -261,30 +261,30 @@ var Weather = React.createClass({
 
     navigator.geolocation.getCurrentPosition(success, error);
 
-    // location data: granted
+    // location: granted
     function success(position){
-      // var latitude = position.coords.latitude;
-      // var longitude = position.coords.longitude;
-      // console.log(latitude, longitude)
-
       component.setState({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
+      component.getLocation();
+      component.getWeather();
+    }
 
+    //location: denied:
+    function error(){
+
+      component.setState({
+        latitude: 33.7490,
+        longitude: -84.3880,
+        locationPermission: false,
+      });
 
       component.getLocation();
       component.getWeather();
-
-    }
-
-    //location data: denied:
-    function error(){
-      console.log('y u no want weather');
     }
 
     navigator.geolocation.getCurrentPosition(success, error);
-
 
   },
 
