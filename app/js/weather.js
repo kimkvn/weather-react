@@ -40,7 +40,7 @@ var WelcomeMessage = React.createClass({
   }
 });
 
-var Location = React.createClass({
+var DateTime = React.createClass({
   getInitialState: function(){
     return({
       formattedTime: '',
@@ -91,11 +91,26 @@ var Location = React.createClass({
   },
 
   render: function(){
+    if(!this.props.locationPermission){
+      return(
+        <div></div>
+      )
+    }
+    return(
+      <div>
+        <p className="date weekday">{this.state.currentDay}</p>
+        <p className="date time">{this.state.formattedTime} {this.state.meridiem}</p>
+      </div>
+    )
+  },
+});
+
+var Location = React.createClass({
+  render: function(){
     return(
       <div className="location">
         <p className="city">{this.props.location}</p>
-        <p className="date weekday">{this.state.currentDay}</p>
-        <p className="date time">{this.state.formattedTime} {this.state.meridiem}</p>
+        <DateTime locationPermission={this.props.locationPermission}/>
       </div>
     )
   }
@@ -146,7 +161,7 @@ var CurrentWeather = React.createClass({
     return(
       <div>
 
-        <Location location={this.props.location} getWeekday={this.props.getWeekday}/>
+        <Location location={this.props.location} locationPermission={this.props.locationPermission}/>
 
         <div className="temp-block">
           <h1>{this.props.unitPref == "Imperial" ? Math.floor(this.props.value) : Math.floor((this.props.value - 32) * (5/9)) }</h1>
@@ -413,14 +428,6 @@ var Weather = React.createClass({
     }
   },
 
-  // returning a string day of the week from the 'time' data point obj in the Dark Sky API
-  getWeekday: function(val){
-    var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-    // 'time' is returned as a UNIX value. Needs to be multiplied by 1000 to return a UTC value that the Date() method can read correctly
-    var index = (new Date(val * 1000)).getDay();
-    return days[index];
-  },
-
   render: function(){
     return(
       <div>
@@ -433,6 +440,7 @@ var Weather = React.createClass({
             handleSi={this.handleSi}
             location={this.state.location}
             getWeekday={this.getWeekday}
+            locationPermission={this.state.locationPermission}
           />
 
           <CurrentDetails
