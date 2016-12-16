@@ -1,6 +1,6 @@
 # Weather-React
 
-## [See it in action](https://kimkvn.github.io/weather-react/)
+## [See it in action!](https://kimkvn.github.io/weather-react/) ####(Chrome or Firefox supported only)
 
 **Featured APIs:**
 
@@ -35,4 +35,4 @@ However, I decided to expand on the functionality, thinking it would be a nice c
 - [x] show other current weather stats (precipitation, humidity, wind speed)
 - [x] toggle wind speed between mph and km/h
 
-This project grew exponentially as I worked on it. Just when I thought I was nearing the end, I realized the app should have another feature. But as a result, I learned so much about React and various tools and methods. And knowing is half the battle. 
+This project grew exponentially as I worked on it. Just when I thought I was nearing the end, I realized the app should have another feature. But as a result, I learned so much about React and various tools and methods. And knowing is half the battle.
