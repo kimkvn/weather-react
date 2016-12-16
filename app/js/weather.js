@@ -1,4 +1,3 @@
-
 var DefaultLocation = React.createClass({
 
   render: function(){
@@ -24,7 +23,6 @@ var WelcomeMessage = React.createClass({
   getInitialState: function(){
     return({
       welcomeText: '',
-
     })
   },
 
@@ -176,16 +174,13 @@ var CurrentWeather = React.createClass({
           <WelcomeMessage />
           <h4>Getting the local weather...</h4>
           <div id="spin"></div>
-
         </div>
       )
     }
 
     return(
       <div>
-
         <Location location={this.props.location} locationPermission={this.props.locationPermission}/>
-
         <div className="temp-block">
           <h1>{this.props.unitPref == "Imperial" ? Math.floor(this.props.value) : Math.floor((this.props.value - 32) * (5/9)) }</h1>
           <div className="unit-toggle">
@@ -194,7 +189,6 @@ var CurrentWeather = React.createClass({
             <a onClick={this.props.handleSi}> &#176;C</a>
           </div>
         </div>
-
       </div>
     )
   }
@@ -312,7 +306,6 @@ var Weather = React.createClass({
       unitPref: '',
       loading: true,
       location: '',
-
       forecast: [],
     });
   },
@@ -464,7 +457,6 @@ var Weather = React.createClass({
           locationPermission={this.state.locationPermission}
         />
         <div className="current-temp-wrap">
-
           <CurrentWeather
             value={this.state.currentTemp}
             unitPref={this.state.unitPref}
@@ -475,7 +467,6 @@ var Weather = React.createClass({
             locationPermission={this.state.locationPermission}
             loading={this.state.loading}
           />
-
           <CurrentDetails
             unitPref={this.state.unitPref}
             currentTemp={this.state.currentTemp}
@@ -486,18 +477,14 @@ var Weather = React.createClass({
             precip={Math.floor(this.state.currentPrecip * 100)}
             loading={this.state.loading}
           />
-
         </div>
-
         <Forecast
           item={this.state.forecast}
           unitPref={this.state.unitPref}
           getIcon={this.getIcon}
           locationPermission={this.state.locationPermission}
         />
-
         <Credits loading={this.state.loading}/>
-
       </div>
     )
   }
