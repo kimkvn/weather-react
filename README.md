@@ -1,12 +1,12 @@
 # Weather-React
 
-## (See it in action!)[https://kimkvn.github.io/weather-react/]
+## [See it in action](https://kimkvn.github.io/weather-react/)
 
 **Featured APIs:**
 
 [Dark Sky](https://darksky.net/dev/)
 
-[Google Geolocation](https://developers.google.com/maps/documentation/javascript/examples/map-geolocation)
+[GoogleMaps Geocode](https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse)
 
 **Built with:**
 * React
@@ -26,11 +26,13 @@ Originally I set out to build an app that would show the local weather. Per the 
 - [x] to have a way to toggle between Fahrenheit and Celsius
 - [x] to show a different weather icon related to whatever the current weather conditions are
 
-However, I decided to expand on the functionality, thinking it would be a nice challenge to add some features similar to the ones you Google shows when you search for weather in their browser. The app should also:
+However, I decided to expand on the functionality, thinking it would be a nice challenge to add some features similar to the ones Google shows when you search for weather in their browser. The app should also:
 
 - [x] show the user's location (city)
 - [x] show the day and approximate time of the user's request
 - [x] show the weather forecast for the upcoming week
-- [x] the forecast should have high/low temps and will also toggle between Fahrenheit and Celsius
+- [x] have high/low temps and will also toggle between Fahrenheit and Celsius
 - [x] show other current weather stats (precipitation, humidity, wind speed)
 - [x] toggle wind speed between mph and km/h
+
+This project grew exponentially as I worked on it. Just when I thought I was nearing the end, I realized the app should have another feature. But as a result, I learned so much about React and various tools and methods by doing this project. 
