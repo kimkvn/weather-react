@@ -1,6 +1,7 @@
 # Weather-React
 
-## [See it in action!](https://kimkvn.github.io/weather-react/) ####(Chrome or Firefox supported only)
+## [See it in action!](https://kimkvn.github.io/weather-react/)
+(Chrome or Firefox supported only)
 
 **Featured APIs:**
 
