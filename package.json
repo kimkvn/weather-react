@@ -27,6 +27,7 @@
     "jshint": "^2.9.4",
     "jshint-loader": "^0.8.3",
     "node-libs-browser": "^2.0.0",
+    "spin.js": "^2.3.2",
     "webpack": "^1.14.0"
   },
   "dependencies": {
