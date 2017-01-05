@@ -5,20 +5,9 @@ import Credits from "./credits.js";
 import WelcomeMessage from "./welcome-message.js";
 import CurrentDetails from "./current-details.js";
 import DefaultLocation from "./default-location.js";
-import DateTime from "./date-time.js";
+import Location from "./location.js";
 
 
-
-var Location = React.createClass({
-  render: function(){
-    return(
-      <div className="location">
-        <p className="city">{this.props.location}</p>
-        <DateTime locationPermission={this.props.locationPermission}/>
-      </div>
-    )
-  }
-});
 
 var CurrentWeather = React.createClass({
 
