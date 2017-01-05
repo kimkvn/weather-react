@@ -17,8 +17,21 @@
   },
   "homepage": "https://github.com/kimkvn/weather-react#readme",
   "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
     "browser-sync": "^2.18.2",
     "gulp": "^3.9.1",
     "gulp-sass": "^2.3.2",
+    "jshint": "^2.9.4",
+    "jshint-loader": "^0.8.3",
+    "node-libs-browser": "^2.0.0",
+    "spin.js": "^2.3.2",
+    "webpack": "^1.14.0"
+  },
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
   }
 }
